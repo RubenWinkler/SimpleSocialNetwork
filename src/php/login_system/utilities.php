@@ -678,6 +678,35 @@ function _alphanumToken() {
 }
 
 
+
+
+
+function encodeUserID () {
+
+  $encodedUserID = base64_encode("JHf33QTa56afÜh32aURCdjY5H{$_SESSION['id']}");
+
+  return $encodedUserID;
+}
+
+
+
+
+
+function decodeUserID ($encodedUserID) {
+
+  $decodedUserID = base64_decode($encodedUserID);
+
+  $explodedUserID = explode("JHf33QTa56afÜh32aURCdjY5H", $decodedUserID);
+
+  $userID = $explodedUserID[1];
+
+  return $userID;
+
+}
+
+
+
+
 function prepareLogin($id, $username, $remember) {
 
   // $_SESSION['id'] auf die User-ID gesetzt

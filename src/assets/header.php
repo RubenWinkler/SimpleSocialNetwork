@@ -33,7 +33,12 @@
             <i class="hide"><?php echo guard(); ?></i>
             <li class="header_nav_li hidden-lg hidden-md hidden-sm"><a href="index.php">Startseite</a></li>
             <li class="header_nav_li hidden-lg hidden-md hidden-sm"><a href="blog.php">YouTube-Blog</a></li>
-            <li class="header_nav_li"><a href="profile.php" class="header_nav_li_profile_element"><img class="img-rounded hidden-xs" src="<?php if (isset($profile_picture)) { echo $profile_picture; } elseif (file_exists("./../avatar_uploads/{$_SESSION['username']}.jpg")) { echo "./../avatar_uploads/{$_SESSION['username']}.jpg"; } ?>" id="navbar_user_avatar"><?php if(isset($_SESSION["username"])) echo $_SESSION["username"]; ?></a></li>
+            <li class="header_nav_li">
+              <a href="profile.php" class="header_nav_li_profile_element">
+                <img class="img-rounded hidden-xs" src="<?php if (isset($profile_picture)) { echo $profile_picture; } elseif (file_exists('./../avatar_uploads/{$_SESSION["username"]}.jpg')) { echo './../avatar_uploads/{$_SESSION["username"]}.jpg'; } ?>" id="navbar_user_avatar">
+                <?php if (isset($_SESSION["username"])) { echo $_SESSION["username"]; } ?>
+              </a>
+            </li>
             <li class="header_nav_li hidden-lg hidden-md hidden-sm"><a href="nachrichten.php">Nachrichten</a></li>
             <li class="header_nav_li hidden-lg hidden-md hidden-sm"><a href="mitglieder.php">Mitglieder</a></li>
             <li class="header_nav_li hidden-lg hidden-md hidden-sm"><a href="gruppen.php">Gruppen</a></li>

@@ -18,7 +18,7 @@ if (isset($_POST['login_button'], $_POST["token"])) {
       $form_errors = array_merge($form_errors, check_empty_fields($required_fields));
 
       // Wenn das $form_errors-Array bis hierhin leer ist (also keine Fehler vorliegen),
-      if (empty($form_errors)){
+      if (empty($form_errors)) {
 
           // wird $username auf $_POST['Benutzername']
           $username = $_POST['Benutzername'];

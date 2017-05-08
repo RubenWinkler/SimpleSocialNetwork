@@ -14,6 +14,7 @@ if ((isset($_SESSION["id"]) || isset($_GET["user_identity"])) && !isset($_POST["
   } else {
 
     $id = $_SESSION["id"];
+
   }
 
   // ein SQL-Statement in der Variablen $sqlQuery zusammengesetzt,
@@ -189,7 +190,6 @@ if ((isset($_SESSION["id"]) || isset($_GET["user_identity"])) && !isset($_POST["
     $result = "<script type='text/javascript'>swal('Error', 'Diese Anfrage stammt von einer unbekannten Quelle. Es handelt sich möglicher Weise um einen Angriff.', 'error');</script>";
 
   }
-
 
 }
 
