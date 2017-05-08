@@ -1,6 +1,6 @@
 <?php
-include_once("./../src/php/login_system/database_connection.php");
-include_once("./../src/php/login_system/utilities.php");
+include_once("./src/php/login_system/database_connection.php");
+include_once("./src/php/login_system/utilities.php");
 
 // Wenn $_SESSION["id"] gesetzt ist (der Benutzer eingeloggt ist),
 if ((isset($_SESSION["id"]) || isset($_GET["user_identity"])) && !isset($_POST["edit_profile_button"])) {
@@ -35,9 +35,9 @@ if ((isset($_SESSION["id"]) || isset($_GET["user_identity"])) && !isset($_POST["
     $join_date = strftime("%d. %B %Y", strtotime($rs["join_date"]));
   }
 
-  $user_pic = "./../avatar_uploads/" . $username . ".jpg";
+  $user_pic = "./avatar_uploads/" . $username . ".jpg";
 
-  $default_user_pic = "./../avatar_uploads/default_avatar.jpg";
+  $default_user_pic = "./avatar_uploads/default_avatar.jpg";
 
   if (file_exists($user_pic)) {
 
@@ -49,9 +49,9 @@ if ((isset($_SESSION["id"]) || isset($_GET["user_identity"])) && !isset($_POST["
 
   }
 
-  $user_banner = "./../banner_uploads/" . $username . ".jpg";
+  $user_banner = "./banner_uploads/" . $username . ".jpg";
 
-  $default_user_banner = "./../banner_uploads/default_banner.jpg";
+  $default_user_banner = "./banner_uploads/default_banner.jpg";
 
   if (file_exists($user_banner)) {
 

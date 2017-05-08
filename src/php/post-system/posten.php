@@ -152,11 +152,11 @@ if ((isset($_POST["post_box_posten_button"]) || isset($_POST["post_box_posten_bu
 
       if (isset($_POST["post_box_posten_button"])) {
 
-        $required_fields = array("Posttext", "Foto-Link");
+        $required_fields = array("Posttext");
 
       } else {
 
-        $required_fields = array("Posttext-mobile", "Foto-Link-mobile");
+        $required_fields = array("Posttext-mobile");
 
       }
 
@@ -172,7 +172,7 @@ if ((isset($_POST["post_box_posten_button"]) || isset($_POST["post_box_posten_bu
 
           if ($uploadImage["isImageMoved"]) {
 
-            $imagePath = $uploadImage["path"];
+            $imagePath = $uploadImage["image_name"];
 
           }
 
@@ -196,7 +196,7 @@ if ((isset($_POST["post_box_posten_button"]) || isset($_POST["post_box_posten_bu
 
             $statement = $db->prepare($sqlInsert);
 
-            $statement->execute(array(':user_id' => $user_id, ':post_type' => $post_type, ':post_text' => $post_text, ':image_directory' => $image_directory));
+            $statement->execute(array(':user_id' => $user_id, ':post_type' => $post_type, ':post_text' => $post_text, ':image_directory' => $imagePath));
 
           } catch (PDOException $ex) {
 

@@ -1,7 +1,7 @@
 <?php
-include_once("./../src/php/login_system/database_connection.php");
-include_once("./../src/php/login_system/utilities.php");
-include_once ("./../src/php/login_system/send-email-gmail.php");
+include_once("./src/php/login_system/database_connection.php");
+include_once("./src/php/login_system/utilities.php");
+include_once ("./src/php/login_system/send-email-gmail.php");
 
 // Wenn das Reset-Password-Formular abgeschickt wurde,
 if (isset($_POST["password_reset_button"], $_POST["token"])) {

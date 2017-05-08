@@ -1,5 +1,5 @@
-<?php include_once("./../src/php/login_system/utilities.php"); ?>
-<?php include_once("./../src/php/login_system/profile.php"); ?>
+<?php include_once("./src/php/login_system/utilities.php"); ?>
+<?php include_once("./src/php/login_system/profile.php"); ?>
 <!-- Wenn der Benutzer eingeloggt ist wird der Header für eingeloggte Nutzer angezeigt. -->
 <?php if (isset($_SESSION["username"]) || isCookieValid($db)): ?>
   <nav class="navbar navbar-inverse navbar-fixed-top" id="header">
@@ -14,7 +14,7 @@
         <div id="header_logo_und_schriftzug">
         <!-- Logo und "DIVISION Network"-Schriftzug -->
           <a class="navbar-brand" id="header_logo" href="index.php">
-            <img alt="DIVISION Network" src="./../src/img/header_logo.png">
+            <img alt="DIVISION Network" src="./src/img/header_logo.png">
           </a>
         <!-- /Logo und "DIVISION Network"-Schriftzug -->
         </div>
@@ -35,7 +35,7 @@
             <li class="header_nav_li hidden-lg hidden-md hidden-sm"><a href="blog.php">YouTube-Blog</a></li>
             <li class="header_nav_li">
               <a href="profile.php" class="header_nav_li_profile_element">
-                <img class="img-rounded hidden-xs" src="<?php if (isset($profile_picture)) { echo $profile_picture; } elseif (file_exists('./../avatar_uploads/{$_SESSION["username"]}.jpg')) { echo './../avatar_uploads/{$_SESSION["username"]}.jpg'; } ?>" id="navbar_user_avatar">
+                <img class="img-rounded hidden-xs" src="<?php if (isset($profile_picture)) { echo $profile_picture; } elseif (file_exists('./avatar_uploads/{$_SESSION["username"]}.jpg')) { echo './avatar_uploads/{$_SESSION["username"]}.jpg'; } ?>" id="navbar_user_avatar">
                 <?php if (isset($_SESSION["username"])) { echo $_SESSION["username"]; } ?>
               </a>
             </li>
@@ -67,7 +67,7 @@
           <div id="header_logo_und_schriftzug">
           <!-- Logo und "DIVISION Network"-Schriftzug -->
             <a class="navbar-brand" id="header_logo" href="index.php">
-              <img alt="DIVISION Network" src="./../src/img/header_logo.png">
+              <img alt="DIVISION Network" src="./src/img/header_logo.png">
             </a>
           <!-- /Logo und "DIVISION Network"-Schriftzug -->
           </div>

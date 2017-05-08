@@ -568,7 +568,7 @@ function signout () {
      $avatar_name = $username . ".jpg";
 
      // wird der gewünschte Dateipfad, unter dem die Datei auf dem Server gespeichert wurde, in der Variablen $path gespeichert.
-     $path = "./../avatar_uploads" . $dir_seperator . $avatar_name;
+     $path = "./avatar_uploads" . $dir_seperator . $avatar_name;
 
      // Wenn außerdem, die Datei erfolgreich zum gewünschten Pfad verschoben wurde,
      if (move_uploaded_file($temp_file, $path)) {
@@ -626,7 +626,7 @@ function signout () {
      $banner_name = $username . ".jpg";
 
      // wird der gewünschte Dateipfad, unter dem die Datei auf dem Server gespeichert wurde, in der Variablen $path gespeichert.
-     $path = "./../banner_uploads" . $dir_seperator . $banner_name;
+     $path = "./banner_uploads" . $dir_seperator . $banner_name;
 
      // Wenn außerdem, die Datei erfolgreich zum gewünschten Pfad verschoben wurde,
      if (move_uploaded_file($temp_file, $path)) {

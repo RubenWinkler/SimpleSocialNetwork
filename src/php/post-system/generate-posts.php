@@ -25,9 +25,9 @@ try {
 
       $username = $user["username"];
 
-      $user_avatar = "./../avatar_uploads/{$username}.jpg";
+      $user_avatar = "avatar_uploads/{$username}.jpg";
 
-      $default_avatar = "./../avatar_uploads/default_avatar.jpg";
+      $default_avatar = "avatar_uploads/default_avatar.jpg";
 
       if (file_exists($user_avatar)) {
 
@@ -174,7 +174,7 @@ try {
 
       $image_name = $single_post["image_directory"];
 
-      $image_directory_path = "./../image_uploads/{$image_name}.jpg";
+      $image_directory_path = "./image_uploads/{$image_name}.jpg";
 
       $post = '<div class="container-fluid post">
                 <div class="row">

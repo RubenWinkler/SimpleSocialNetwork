@@ -1,6 +1,6 @@
 <?php
-include_once ("./../src/php/login_system/database_connection.php");
-include_once ("./../src/php/login_system/utilities.php");
+include_once ("./src/php/login_system/database_connection.php");
+include_once ("./src/php/login_system/utilities.php");
 
 // Wenn der Login-Button gedrückt wurde,
 if (isset($_POST['login_button'], $_POST["token"])) {

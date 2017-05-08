@@ -1,6 +1,6 @@
 <?php
-include_once("./../src/php/login_system/database_connection.php");
-include_once("./../src/php/login_system/utilities.php");
+include_once("./src/php/login_system/database_connection.php");
+include_once("./src/php/login_system/utilities.php");
 
 if (isset($_POST["change_password_button"], $_POST["token"])) {
 

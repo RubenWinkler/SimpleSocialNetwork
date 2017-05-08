@@ -1,7 +1,7 @@
 <?php
-include_once ("./../src/php/login_system/database_connection.php");
-include_once ("./../src/php/login_system/utilities.php");
-include_once ("./../src/php/login_system/send-email-gmail.php");
+include_once ("./src/php/login_system/database_connection.php");
+include_once ("./src/php/login_system/utilities.php");
+include_once ("./src/php/login_system/send-email-gmail.php");
 
 // Wenn $_POST["E-Mail"] gesetzt ist (also das Signup-Formular abgeschickt wurde),
 if(isset($_POST["E-Mail"], $_POST["token"])) {

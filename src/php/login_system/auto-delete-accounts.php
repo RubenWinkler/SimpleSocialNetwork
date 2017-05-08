@@ -21,8 +21,8 @@ try {
 
       $id = $row["id"];
 
-      $user_avatar = "./../../../avatar_uploads/" . $username . ".jpg";
-      $user_banner = "./../../../banner_uploads/" . $username . ".jpg";
+      $user_avatar = "./../../avatar_uploads/" . $username . ".jpg";
+      $user_banner = "./../../banner_uploads/" . $username . ".jpg";
 
       if (file_exists($user_avatar)) {
 

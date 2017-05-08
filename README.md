@@ -1,2 +1,2 @@
-# DIVISION-Network
-Social Network und YouTube-Blog
+# SimpleSocialNetwork
+A simple Social Network System.

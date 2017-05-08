@@ -1,9 +1,9 @@
 <!-- postbox.js wird eingebunden -->
-<script type="text/javascript" src="./../src/js/postbox.js"></script>
+<script type="text/javascript" src="./src/js/postbox.js"></script>
 
 <?php
-include_once("./../src/php/post-system/post-utilities.php");
-include_once("./../src/php/post-system/posten.php"); ?>
+include_once("./src/php/post-system/post-utilities.php");
+include_once("./src/php/post-system/posten.php"); ?>
 <!-- Wenn der Benutzer eingeloggt ist, wird die Postbox angezeigt. -->
 <?php if (isset($_SESSION["username"]) || isCookieValid($db)): ?>
   <div class="container-fluid" id="post_box">
@@ -12,14 +12,14 @@ include_once("./../src/php/post-system/posten.php"); ?>
       <?php if (!empty($form_errors)) {echo show_errors($form_errors);} ?>
       <?php if (isset($result)) {echo '</div>';} ?>
     </div>
-    <form action="" method="post" enctype="multipart/form-data">
+    <form method="post" action="" enctype="multipart/form-data">
       <input type="hidden" name="hidden_id" value="<?php if (function_exists('encodeUserID')) { echo encodeUserID(); } ?>">
       <input type="hidden" name="token" value="<?php if (function_exists('_token')) { echo _token(); } ?>">
       <div class="row">
         <!-- Post-Inputs für Desktop -->
         <div class="col-sm-12 hidden-xs">
           <div id="post_box_avatar_cell">
-            <img src="<?php if (isset($profile_picture)) { echo $profile_picture; } elseif (file_exists("./../avatar_uploads/{$_SESSION['username']}.jpg")) { echo "./../avatar_uploads/{$_SESSION['username']}.jpg"; } ?>" class="img-rounded" id="post_box_avatar">
+            <img src="<?php if (isset($profile_picture)) { echo $profile_picture; } elseif (file_exists("./avatar_uploads/{$_SESSION['username']}.jpg")) { echo "./avatar_uploads/{$_SESSION['username']}.jpg"; } ?>" class="img-rounded" id="post_box_avatar">
           </div>
           <span id="whats_new_text_span"><h4 id="whats_new_text">Was gibt's Neues <?php if(isset($_SESSION["username"]) || isCookieValid($db)) echo $_SESSION["username"]; ?>?</h4></span>
           <div id="textpost_textarea_container">
