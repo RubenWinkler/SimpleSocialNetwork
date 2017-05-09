@@ -2,16 +2,16 @@
 $page_title = "Registrieren - DIVISION Network";
 include_once("./src/assets/head.php");
 include_once("./src/assets/header.php");
-include_once("./src/php/login_system/signup.php");
+include_once("./src/php/login-system/signup.php");
 ?>
 
 <div class="container-fluid" id="content">
-    <?php include_once("./src/assets/left_sidebar.php"); ?>
-    <div class="col-md-6 col-sm-8 col-xs-12" id="main_content_container">
+    <?php include_once("./src/assets/left-sidebar.php"); ?>
+    <div class="col-md-6 col-sm-8 col-xs-12" id="main-content-container">
       <div class="container-fluid">
         <div class="row">
           <div class="col-xs-12">
-            <div class="text_container">
+            <div class="text-container">
             <h3>Registriere dich jetzt!</h3>
             <p>Werde jetzt Mitglied im DIVISION Network und werde Teil einer stetig wachsenden Community aus begeisterten YouTubern.</p>
             </div>
@@ -30,30 +30,30 @@ include_once("./src/php/login_system/signup.php");
           <div class="container-fluid">
             <div class="row">
               <div class="col-xs-12">
-                <label for="signup_username" class="sr-only">E-Mail:</label>
-                  <input type="text" class="form-control" id="signup_email" placeholder="E-Mail" name="E-Mail">
+                <label for="signup-username" class="sr-only">E-Mail:</label>
+                  <input type="text" class="form-control" id="signup-email" placeholder="E-Mail" name="E-Mail">
               </div>
             </div>
             <div class="row">
               <div class="col-xs-12">
-                <label for="signup_username" class="sr-only">Benutzername:</label>
-                  <input type="text" class="form-control" id="signup_username" placeholder="Benutzername" name="Benutzername">
+                <label for="signup-username" class="sr-only">Benutzername:</label>
+                  <input type="text" class="form-control" id="signup-username" placeholder="Benutzername" name="Benutzername">
               </div>
             </div>
             <div class="row">
               <div class="col-xs-12">
-                <label for="signup_password" class="sr-only">Passwort:</label>
-                  <input type="password" class="form-control" id="signup_password" placeholder="Passwort" name="Passwort">
-                  <div id="show_login_again_text_cell">
-                    <a href="./login.php" id="show_login_again_text">Doch anmelden?</a>
+                <label for="signup-password" class="sr-only">Passwort:</label>
+                  <input type="password" class="form-control" id="signup-password" placeholder="Passwort" name="Passwort">
+                  <div id="show-login-again-text-cell">
+                    <a href="./login.php" id="show-login-again-text">Doch anmelden?</a>
                   </div>
               </div>
             </div>
             <div class="row">
               <div class="col-xs-12">
-                <div class="login_or_signup">
+                <div class="login-or-signup">
                   <input type="hidden" name="token" value="<?php if (function_exists('_token')) { echo _token(); } ?>">
-                  <button type="submit" class="btn btn-default pull-center" id="signup_button" name="signup_button">Registrieren</button>
+                  <button type="submit" class="btn btn-default pull-center" id="signup-button" name="signup-button">Registrieren</button>
                 </div>
               </div>
             </div>
@@ -61,11 +61,11 @@ include_once("./src/php/login_system/signup.php");
         </form>
       </div>
     </div>
-    <div class="col-lg-2 col-md-4 col-sm-4 hidden-xs" id="right_sidebar_col">
-      <div id="right_sidebar">
-      <?php include_once("./src/assets/widgets/social_nav_widget/social_nav_widget.php"); ?>
+    <div class="col-lg-2 col-md-4 col-sm-4 hidden-xs" id="right-sidebar-col">
+      <div id="right-sidebar">
+      <?php include_once("./src/assets/widgets/social-nav-widget/social-nav-widget.php"); ?>
       </div>
     </div>
-    <?php include_once("./src/assets/widgets/chat_widget/chat_widget.php"); ?>
+    <?php include_once("./src/assets/widgets/chat-widget/chat-widget.php"); ?>
 </div>
 <?php include_once("./src/assets/footer.php"); ?>
