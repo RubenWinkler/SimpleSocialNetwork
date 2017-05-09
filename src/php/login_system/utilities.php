@@ -669,15 +669,6 @@ function validate_token($requestToken) {
 }
 
 
-function _alphanumToken() {
-
-  $alphanumToken = md5(uniqid(rand(), true));
-
-  return $alphanumToken;
-
-}
-
-
 
 
 

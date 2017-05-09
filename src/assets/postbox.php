@@ -3,7 +3,8 @@
 
 <?php
 include_once("./src/php/post-system/post-utilities.php");
-include_once("./src/php/post-system/posten.php"); ?>
+include_once("./src/php/post-system/posten.php");
+include_once("./src/php/post-system/delete-post.php"); ?>
 <!-- Wenn der Benutzer eingeloggt ist, wird die Postbox angezeigt. -->
 <?php if (isset($_SESSION["username"]) || isCookieValid($db)): ?>
   <div class="container-fluid" id="post_box">
@@ -63,7 +64,7 @@ include_once("./src/php/post-system/posten.php"); ?>
               <button class="btn btn-default select_post_content_buttons" id="post_box_photo_button" onclick="change_postbox('photo');"><i class="fa fa-camera-retro fa-lg" aria-hidden="true"></i></button>
               <button class="btn btn-default select_post_content_buttons" id="post_box_link_button" onclick="change_postbox('link');"><i class="fa fa-link fa-lg" aria-hidden="true"></i></button>
             </span>
-            <button class="btn btn-default" name ="post_box_posten_button" id="post_box_posten_button" type="submit">Posten</button>
+            <button class="btn btn-default" name ="post_box_posten_button_mobile" id="post_box_posten_button" type="submit">Posten</button>
           </div>
           <!-- Ende: select-post-content-buttons für Mobile -->
         </div>

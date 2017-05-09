@@ -10,6 +10,7 @@ try {
 
   foreach ($get_posts_statement AS $single_post) {
 
+    $post_id = $single_post["id"];
     $user_id = $single_post["user_id"];
     $post_type = $single_post["post_type"];
     $text = $single_post["post_text"];
@@ -41,6 +42,22 @@ try {
 
       $alphanumToken = _alphanumToken();
 
+      $post_id = encodeAnything($post_id);
+
+      $post_user_id = encodeAnything($user_id);
+
+      if (isset($_SESSION["id"])) {
+
+        $current_user_id = encodeUserID();
+
+      } else {
+
+        $current_user_id = NULL;
+
+      }
+
+      $securityToken = _securityToken();
+
     }
 
     if ($post_type === "text") {
@@ -54,7 +71,18 @@ try {
                     <div class="dropdown pull-right">
                       <button class="btn btn-default dropdown-toggle btn-xs post_options_btn" type="button" data-toggle="dropdown"><i class="fa fa-ellipsis-h fa-lg post_options_symbol" aria-hidden="true"></i></button>
                       <ul class="dropdown-menu post_options_dropdown">
-                        <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> Post löschen</a></li>
+                        <li>
+                        <form method="post" action="">
+                          <span class="form-group">
+                            <input type="hidden" name="post_id" value="'.$post_id.'">
+                            <input type="hidden" name="post_user_id" value="'.$post_user_id.'">
+                            <input type="hidden" name="current_user_id" value="'.$current_user_id.'">
+                            <input type="hidden" name="securityToken" value="'.$securityToken.'">
+                            <label for="delete-post" class="sr-only">Post löschen</label>
+                            <button type="submit" class="form-control delete-post-button" name="delete-post"><i class="fa fa-trash" aria-hidden="true"></i> Post löschen</button>
+                          </span>
+                        </form>
+                        </li>
                         <li><a href="#"><i class="fa fa-flag" aria-hidden="true"></i> Post melden</a></li>
                       </ul>
                     </div>
@@ -95,7 +123,18 @@ try {
                     <div class="dropdown pull-right">
                       <button class="btn btn-default dropdown-toggle btn-xs post_options_btn" type="button" data-toggle="dropdown"><i class="fa fa-ellipsis-h fa-lg post_options_symbol" aria-hidden="true"></i></button>
                       <ul class="dropdown-menu post_options_dropdown">
-                        <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> Post löschen</a></li>
+                        <li>
+                        <form method="post" action="">
+                          <span class="form-group">
+                            <input type="hidden" name="post_id" value="'.$post_id.'">
+                            <input type="hidden" name="post_user_id" value="'.$post_user_id.'">
+                            <input type="hidden" name="current_user_id" value="'.$current_user_id.'">
+                            <input type="hidden" name="securityToken" value="'.$securityToken.'">
+                            <label for="delete-post" class="sr-only">Post löschen</label>
+                            <button type="submit" class="form-control delete-post-button" name="delete-post"><i class="fa fa-trash" aria-hidden="true"></i> Post löschen</button>
+                          </span>
+                        </form>
+                        </li>
                         <li><a href="#"><i class="fa fa-flag" aria-hidden="true"></i> Post melden</a></li>
                       </ul>
                     </div>
@@ -141,7 +180,18 @@ try {
                     <div class="dropdown pull-right">
                       <button class="btn btn-default dropdown-toggle btn-xs post_options_btn" type="button" data-toggle="dropdown"><i class="fa fa-ellipsis-h fa-lg post_options_symbol" aria-hidden="true"></i></button>
                       <ul class="dropdown-menu post_options_dropdown">
-                        <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> Post löschen</a></li>
+                        <li>
+                        <form method="post" action="">
+                          <span class="form-group">
+                            <input type="hidden" name="post_id" value="'.$post_id.'">
+                            <input type="hidden" name="post_user_id" value="'.$post_user_id.'">
+                            <input type="hidden" name="current_user_id" value="'.$current_user_id.'">
+                            <input type="hidden" name="securityToken" value="'.$securityToken.'">
+                            <label for="delete-post" class="sr-only">Post löschen</label>
+                            <button type="submit" class="form-control delete-post-button" name="delete-post"><i class="fa fa-trash" aria-hidden="true"></i> Post löschen</button>
+                          </span>
+                        </form>
+                        </li>
                         <li><a href="#"><i class="fa fa-flag" aria-hidden="true"></i> Post melden</a></li>
                       </ul>
                     </div>
@@ -185,7 +235,18 @@ try {
                     <div class="dropdown pull-right">
                       <button class="btn btn-default dropdown-toggle btn-xs post_options_btn" type="button" data-toggle="dropdown"><i class="fa fa-ellipsis-h fa-lg post_options_symbol" aria-hidden="true"></i></button>
                       <ul class="dropdown-menu post_options_dropdown">
-                        <li><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> Post löschen</a></li>
+                        <li>
+                        <form method="post" action="">
+                          <span class="form-group">
+                            <input type="hidden" name="post_id" value="'.$post_id.'">
+                            <input type="hidden" name="post_user_id" value="'.$post_user_id.'">
+                            <input type="hidden" name="current_user_id" value="'.$current_user_id.'">
+                            <input type="hidden" name="securityToken" value="'.$securityToken.'">
+                            <label for="delete-post" class="sr-only">Post löschen</label>
+                            <button type="submit" class="form-control delete-post-button" name="delete-post"><i class="fa fa-trash" aria-hidden="true"></i> Post löschen</button>
+                          </span>
+                        </form>
+                        </li>
                         <li><a href="#"><i class="fa fa-flag" aria-hidden="true"></i> Post melden</a></li>
                       </ul>
                     </div>

@@ -1082,3 +1082,39 @@ a#show_login_again_text:hover {
 .collapse_write_comment {
 	margin-top: 10px;
 }
+
+.delete-post-button {
+	width: 100%;
+	border: none;
+	margin: 0px;
+	border-color: transparent;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	border-radius: 0px;
+}
+
+.delete-post-button:hover {
+	background-color: #eee;
+}
+
+#postbox_image_conatiner {
+	width: 85%;
+	float: right;
+	padding-bottom: 25px;
+	padding-top: 15px;
+}
+
+#postbox_image_mobile {
+	height: 2.5em;
+	width: 100%;
+	resize: none;
+}
+
+#postbox_image {
+	float: left;
+}
+
+input[type="file"] {
+	background-color: red;
+}

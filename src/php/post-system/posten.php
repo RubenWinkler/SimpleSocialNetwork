@@ -180,7 +180,13 @@ if ((isset($_POST["post_box_posten_button"]) || isset($_POST["post_box_posten_bu
 
           $post_text = $_POST["Posttext-mobile"];
 
-          $image_directory = $_POST["Foto-Link-mobile"];
+          $uploadImage = uploadImage();
+
+          if ($uploadImage["isImageMoved"]) {
+
+            $imagePath = $uploadImage["image_name"];
+
+          }
 
         }
 

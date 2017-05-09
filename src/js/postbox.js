@@ -33,7 +33,9 @@ function change_postbox (a) {
   } else if (a == "photo") {
     var photo1 = `<div class="form-group">
                     <label for="textpost_textarea" class="sr-only">Eingabefeld für Foto-Link</label>
-                    <input class="" type="file" name="Image-Link" id="postbox_link">
+                    <div id="postbox_image_conatiner">
+                    <input class="" type="file" name="Image-Link" id="postbox_image">
+                    </div>
                     <input type="hidden" name="post-category" value="image">
                   </div>
                   <div class="form-group">
@@ -43,7 +45,7 @@ function change_postbox (a) {
 
     var photo2 = `<div class="form-group">
                     <label for="textpost_textarea" class="sr-only">Eingabefeld für Foto-Link</label>
-                    <input class="" type="file" name="Image-Link-mobile" id="postbox_link_mobile">
+                    <input class="" type="file" name="Image-Link-mobile" id="postbox_image_mobile">
                     <input type="hidden" name="post-category" value="image">
                   </div>
                   <div class="form-group">
