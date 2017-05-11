@@ -1,7 +1,7 @@
 <?php
 if (isset($_SESSION["username"])) {$page_title = "{$_SESSION['username']} - DIVISION Network";} else {$page_title = "DIVISION Network";}
 include_once("./src/assets/head.php");
-include_once("./src/php/login-system/profile.php");
+include_once("./src/php/login-system/profile-script.php");
 include_once("./src/assets/header.php");
 ?>
 

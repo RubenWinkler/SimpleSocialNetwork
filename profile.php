@@ -2,7 +2,7 @@
 if (isset($_SESSION["username"])) {$page_title = "{$_SESSION["username"]} - DIVISION Network";} else {$page_title = "DIVISION Network";}
 include_once("./src/assets/head.php");
 include_once("./src/assets/header.php");
-include_once("./src/php/login-system/profile.php");
+include_once("./src/php/login-system/profile-script.php");
 ?>
 <div class="container-fluid" id="content">
     <?php include_once("./src/assets/left-sidebar.php"); ?>
@@ -13,7 +13,7 @@ include_once("./src/php/login-system/profile.php");
               Du bist noch kein Mitglied? <a href="signup.php">Registriere dich jetzt!</a></p>
         <?php else: ?>
           <div class="banner-and-avatar-container">
-            <img src="<?php if (isset($profile-banner)) { echo $profile-banner; } ?>" alt="Profilbanner" class="profile-banner img">
+            <img src="<?php if (isset($profile_banner)) { echo $profile_banner; } ?>" alt="Profilbanner" class="profile-banner img">
             <a href="change-profile-banner.php?user_identity=<?php if (isset($encode_id)) {echo $encode_id;} ?>"><span class="glyphicon glyphicon-edit" id="edit-banner-glyphicon"></span></a>
             <div class="profile-picture-container">
               <img src="<?php if (isset($profile_picture)) { echo $profile_picture; } ?>" alt="Profile Picture" class="profile-picture img img-thumbnail">

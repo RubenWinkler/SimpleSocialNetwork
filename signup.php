@@ -2,7 +2,7 @@
 $page_title = "Registrieren - DIVISION Network";
 include_once("./src/assets/head.php");
 include_once("./src/assets/header.php");
-include_once("./src/php/login-system/signup.php");
+include_once("./src/php/login-system/signup-script.php");
 ?>
 
 <div class="container-fluid" id="content">

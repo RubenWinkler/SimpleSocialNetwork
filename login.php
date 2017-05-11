@@ -1,7 +1,7 @@
 <?php
 $page_title = "Anmelden - DIVISION Network";
 include_once("./src/assets/head.php");
-include_once("./src/php/login-system/login.php");
+include_once("./src/php/login-system/login-script.php");
 include_once("./src/assets/header.php");
 ?>
 

@@ -1,7 +1,7 @@
 <?php
-include_once("./src/php/login_system/session.php");
-include_once("./src/php/login_system/database_connection.php");
-include_once("./src/php/login_system/utilities.php");
+include_once("./src/php/login-system/session-script.php");
+include_once("./src/php/login-system/database-connection-script.php");
+include_once("./src/php/login-system/utilities-script.php");
 ?>
 
 <!DOCTYPE html>
@@ -16,14 +16,14 @@ include_once("./src/php/login_system/utilities.php");
   <meta name="description" content="Social Network und YouTube-Blog">
   <meta name="author" content="DIVISION Network">
   <!-- jQuery -->
-  <script src="./src/jquery/jquery-3.2.1.min.js"></script>
+  <script src="./src/js/jquery-3.2.1.min.js"></script>
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="./src/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./src/css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="./src/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./src/css/font-awesome/css/font-awesome.min.css">
   <!-- Sweetalert -->
-  <script src="./src/sweetalert/sweetalert.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="./src/sweetalert/sweetalert.css">
+  <script src="./src/js/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="./src/css/sweetalert.css">
   <!-- DIVISION Network Stylesheet -->
   <link rel="stylesheet" htype="text/css" href="./src/css/styles.css">
   <!-- DIVISION Network Favicon -->

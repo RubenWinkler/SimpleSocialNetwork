@@ -2,7 +2,7 @@
 $page_title = "Passwort vergessen - DIVISION Network";
 include_once("./src/assets/head.php");
 include_once("./src/assets/header.php");
-include_once("./src/php/login-system/password-recovery.php");
+include_once("./src/php/login-system/password-recovery-script.php");
 ?>
 <div class="container-fluid" id="content">
     <?php include_once("./src/assets/left-sidebar.php"); ?>
