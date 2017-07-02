@@ -62,49 +62,51 @@ try {
 
     if ($post_type === "text") {
 
-      $post = '<div class="container-fluid">
-                <div class="row">
-                  <div class="col-sm-12">
-                    <img src="'.$avatar.'" class="img-rounded">
-                    <div class="dropdown pull-right">
-                      <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown"><i class="fa fa-ellipsis-h fa-lg post-options-symbol" aria-hidden="true"></i></button>
-                      <ul class="dropdown-menu">
-                        <li>
-                        <form action="" method="post">
-                          <span class="form-group">
-                            <input type="hidden" name="post-id" value="'.$post_id.'">
-                            <input type="hidden" name="post-user-id" value="'.$post_user_id.'">
-                            <input type="hidden" name="current-user-id" value="'.$current_user_id.'">
-                            <input type="hidden" name="securityToken" value="'.$securityToken.'">
-                            <label for="delete-post" class="sr-only">Post löschen</label>
-                            <button type="submit" class="form-control delete-post-button" name="delete-post"><i class="fa fa-trash" aria-hidden="true"></i> Post löschen</button>
-                          </span>
-                        </form>
-                        </li>
-                        <li><a href="#"><i class="fa fa-flag" aria-hidden="true"></i> Post melden</a></li>
-                      </ul>
+      $post = '<article class="posts box-with-padding">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-sm-12 no-padding">
+                      <div class="dropdown pull-right">
+                        <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown"><i class="fa fa-ellipsis-h fa-lg post-options-symbol" aria-hidden="true"></i></button>
+                        <ul class="dropdown-menu">
+                          <li>
+                          <form action="" method="post">
+                            <span class="form-group">
+                              <input type="hidden" name="post-id" value="'.$post_id.'">
+                              <input type="hidden" name="post-user-id" value="'.$post_user_id.'">
+                              <input type="hidden" name="current-user-id" value="'.$current_user_id.'">
+                              <input type="hidden" name="securityToken" value="'.$securityToken.'">
+                              <label for="delete-post" class="sr-only">Post löschen</label>
+                              <button type="submit" class="form-control delete-post-button" name="delete-post"><i class="fa fa-trash" aria-hidden="true"></i> Post löschen</button>
+                            </span>
+                          </form>
+                          </li>
+                          <li><a href="#"><i class="fa fa-flag" aria-hidden="true"></i> Post melden</a></li>
+                        </ul>
+                      </div>
+                      <img src="'.$avatar.'" class="img-rounded post-avatar">
+                      <h4 class="posted-by-username">'.$username.'</h4>
+                      <h5 class="posted-at-text">'.$posted_at.'</h5><br />
                     </div>
-                    <h4 class="posted-by-username">'.$username.'</h4>
-                    <h5 class="posted-at-text">'.$posted_at.'</h5><br />
+                  </div>
+                  <div class="row post-row">
+                    <div class="col-xs-12 post-text no-padding">'.$text.'</div>
+                  </div>
+                  <div class="row post-interaction-row">
+                    <a class="btn btn-default btn-sm comment-btn" role="button" data-toggle="collapse" href="#'.$alphanumToken.'" aria-expanded="false" aria-controls="'.$alphanumToken.'">
+                    Kommentieren (3)
+                    </a>
+                    <button type="button" class="btn btn-default btn-sm like-button"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i> (15)</button>
+                    <button type="button" class="btn btn-default btn-sm dislike-button"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i> (2)</button>
+                      <form class="collapse collapse-write-comment" id="'.$alphanumToken.'">
+                        <div class="form-group">
+                          <label for="textpost-textarea" class="sr-only">Eingabefeld für Kommentar zum Post</label>
+                          <textarea class="form-control" name="Post-Text" id="textpost-textarea-mobile" placeholder="Kommentieren..."></textarea>
+                        </div>
+                      </form>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-xs-12 post-text">'.$text.'</div>
-                </div>
-                <div class="row post-interaction-row">
-                  <a class="btn btn-default btn-sm comment-btn" role="button" data-toggle="collapse" href="#'.$alphanumToken.'" aria-expanded="false" aria-controls="'.$alphanumToken.'">
-                  Kommentieren (3)
-                  </a>
-                  <button type="button" class="btn btn-default btn-sm like-button"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i> (15)</button>
-                  <button type="button" class="btn btn-default btn-sm dislike-button"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i> (2)</button>
-                    <form class="collapse collapse-write-comment" id="'.$alphanumToken.'">
-                      <div class="form-group">
-                        <label for="textpost-textarea" class="sr-only">Eingabefeld für Kommentar zum Post</label>
-                        <textarea class="form-control" name="Post-Text" id="textpost-textarea-mobile" placeholder="Kommentieren..."></textarea>
-                      </div>
-                    </form>
-                </div>
-              </div>';
+              </article>';
 
       echo $post;
 
@@ -112,56 +114,60 @@ try {
 
       $youtube_link = $single_post["youtube_link"];
 
-      $post = '<div class="container-fluid post">
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="post-avatar-cell">
-                      <img src="'.$avatar.'" class="img-rounded post-user-avatar">
+      $post = '<article class="posts box-with-padding">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-sm-12 no-padding">
+                      <div class="dropdown pull-right">
+                        <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown"><i class="fa fa-ellipsis-h fa-lg post-options-symbol" aria-hidden="true"></i></button>
+                        <ul class="dropdown-menu">
+                          <li>
+                          <form action="" method="post">
+                            <span class="form-group">
+                              <input type="hidden" name="post-id" value="'.$post_id.'">
+                              <input type="hidden" name="post-user-id" value="'.$post_user_id.'">
+                              <input type="hidden" name="current-user-id" value="'.$current_user_id.'">
+                              <input type="hidden" name="securityToken" value="'.$securityToken.'">
+                              <label for="delete-post" class="sr-only">Post löschen</label>
+                              <button type="submit" class="form-control delete-post-button" name="delete-post"><i class="fa fa-trash" aria-hidden="true"></i> Post löschen</button>
+                            </span>
+                          </form>
+                          </li>
+                          <li><a href="#"><i class="fa fa-flag" aria-hidden="true"></i> Post melden</a></li>
+                        </ul>
+                      </div>
+                      <img src="'.$avatar.'" class="img-rounded post-avatar">
+                      <h4 class="posted-by-username">'.$username.'</h4>
+                      <h5 class="posted-at-text">'.$posted_at.'</h5><br />
                     </div>
-                    <div class="dropdown pull-right">
-                      <button class="btn btn-default dropdown-toggle btn-xs post-options-btn" type="button" data-toggle="dropdown"><i class="fa fa-ellipsis-h fa-lg post-options-symbol" aria-hidden="true"></i></button>
-                      <ul class="dropdown-menu post-options-dropdown">
-                        <li>
-                        <form method="post" action="">
-                          <span class="form-group">
-                            <input type="hidden" name="post-id" value="'.$post_id.'">
-                            <input type="hidden" name="post-user-id" value="'.$post_user_id.'">
-                            <input type="hidden" name="current-user-id" value="'.$current_user_id.'">
-                            <input type="hidden" name="securityToken" value="'.$securityToken.'">
-                            <label for="delete-post" class="sr-only">Post löschen</label>
-                            <button type="submit" class="form-control delete-post-button" name="delete-post"><i class="fa fa-trash" aria-hidden="true"></i> Post löschen</button>
-                          </span>
-                        </form>
-                        </li>
-                        <li><a href="#"><i class="fa fa-flag" aria-hidden="true"></i> Post melden</a></li>
-                      </ul>
+                  </div>
+                  <div class="row post-row">
+                    <div class="col-xs-12 post-text no-padding">'.$text.'</div>
+                  </div>
+                  <div class="row post-row">
+                    <div class="col-xs-12 no-padding">
+                      <div class="post-video-container-container">
+                        <div class="post-video-container">
+                            <iframe frameBorder="0" src="'.$youtube_link.'" allowfullscreen></iframe>
+                        </div>
+                      </div>
                     </div>
-                    <h4 class="posted-by-username">'.$username.'</h4>
-                    <h5 class="posted-at-text">'.$posted_at.'</h5><br />
+                  </div>
+                  <div class="row post-interaction-row">
+                    <a class="btn btn-default btn-sm comment-btn" role="button" data-toggle="collapse" href="#'.$alphanumToken.'" aria-expanded="false" aria-controls="'.$alphanumToken.'">
+                    Kommentieren (3)
+                    </a>
+                    <button type="button" class="btn btn-default btn-sm like-button"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i> (15)</button>
+                    <button type="button" class="btn btn-default btn-sm dislike-button"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i> (2)</button>
+                      <form class="collapse collapse-write-comment" id="'.$alphanumToken.'">
+                        <div class="form-group">
+                          <label for="textpost-textarea" class="sr-only">Eingabefeld für Kommentar zum Post</label>
+                          <textarea class="form-control" name="Post-Text" id="textpost-textarea-mobile" placeholder="Kommentieren..."></textarea>
+                        </div>
+                      </form>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-xs-12 post-text">'.$text.'</div>
-                </div>
-                <div class="video-container-container">
-                  <div class="video-container">
-                    <iframe frameBorder="0" src="'.$youtube_link.'" allowfullscreen></iframe>
-                  </div>
-                </div>
-                <div class="row post-interaction-row">
-                <a class="btn btn-default btn-sm comment-btn" role="button" data-toggle="collapse" href="#'.$alphanumToken.'" aria-expanded="false" aria-controls="'.$alphanumToken.'">
-                Kommentieren (3)
-                </a>
-                <button type="button" class="btn btn-default btn-sm like-button"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i> (15)</button>
-                <button type="button" class="btn btn-default btn-sm dislike-button"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i> (2)</button>
-                  <form class="collapse collapse-write-comment" id="'.$alphanumToken.'">
-                    <div class="form-group">
-                      <label for="textpost-textarea" class="sr-only">Eingabefeld für Posts</label>
-                      <textarea class="form-control" name="Post-Text" id="textpost-textarea-mobile" placeholder="Kommentieren"></textarea>
-                    </div>
-                  </form>
-                </div>
-              </div>';
+              </article>';
 
       echo $post;
 
@@ -169,52 +175,56 @@ try {
 
       $link = $single_post["link"];
 
-      $post = '<div class="container-fluid post">
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="post-avatar-cell">
-                      <img src="'.$avatar.'" class="img-rounded post-user-avatar">
+      $post = '<article class="posts box-with-padding">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-sm-12 no-padding">
+                      <div class="dropdown pull-right">
+                        <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown"><i class="fa fa-ellipsis-h fa-lg post-options-symbol" aria-hidden="true"></i></button>
+                        <ul class="dropdown-menu">
+                          <li>
+                          <form action="" method="post">
+                            <span class="form-group">
+                              <input type="hidden" name="post-id" value="'.$post_id.'">
+                              <input type="hidden" name="post-user-id" value="'.$post_user_id.'">
+                              <input type="hidden" name="current-user-id" value="'.$current_user_id.'">
+                              <input type="hidden" name="securityToken" value="'.$securityToken.'">
+                              <label for="delete-post" class="sr-only">Post löschen</label>
+                              <button type="submit" class="form-control delete-post-button" name="delete-post"><i class="fa fa-trash" aria-hidden="true"></i> Post löschen</button>
+                            </span>
+                          </form>
+                          </li>
+                          <li><a href="#"><i class="fa fa-flag" aria-hidden="true"></i> Post melden</a></li>
+                        </ul>
+                      </div>
+                      <img src="'.$avatar.'" class="img-rounded post-avatar">
+                      <h4 class="posted-by-username">'.$username.'</h4>
+                      <h5 class="posted-at-text">'.$posted_at.'</h5><br />
                     </div>
-                    <div class="dropdown pull-right">
-                      <button class="btn btn-default dropdown-toggle btn-xs post-options-btn" type="button" data-toggle="dropdown"><i class="fa fa-ellipsis-h fa-lg post-options-symbol" aria-hidden="true"></i></button>
-                      <ul class="dropdown-menu post-options-dropdown">
-                        <li>
-                        <form method="post" action="">
-                          <span class="form-group">
-                            <input type="hidden" name="post-id" value="'.$post_id.'">
-                            <input type="hidden" name="post-user-id" value="'.$post_user_id.'">
-                            <input type="hidden" name="current-user-id" value="'.$current_user_id.'">
-                            <input type="hidden" name="securityToken" value="'.$securityToken.'">
-                            <label for="delete-post" class="sr-only">Post löschen</label>
-                            <button type="submit" class="form-control delete-post-button" name="delete-post"><i class="fa fa-trash" aria-hidden="true"></i> Post löschen</button>
-                          </span>
-                        </form>
-                        </li>
-                        <li><a href="#"><i class="fa fa-flag" aria-hidden="true"></i> Post melden</a></li>
-                      </ul>
+                  </div>
+                  <div class="row post-row">
+                    <div class="col-xs-12 post-text no-padding">'.$text.'</div>
+                  </div>
+                  <div class="row post-row">
+                    <div class="col-xs-12 no-padding">
+                      <a class="btn btn-default post-link" href="'.$link.'" target="_blank"><i class="fa fa-caret-right fa-lg" aria-hidden="true"></i> www.winkler-webdesgin.com</a>
                     </div>
-                    <h4 class="posted-by-username">'.$username.'</h4>
-                    <h5 class="posted-at-text">'.$posted_at.'</h5><br />
+                  </div>
+                  <div class="row post-interaction-row">
+                    <a class="btn btn-default btn-sm comment-btn" role="button" data-toggle="collapse" href="#'.$alphanumToken.'" aria-expanded="false" aria-controls="'.$alphanumToken.'">
+                    Kommentieren (3)
+                    </a>
+                    <button type="button" class="btn btn-default btn-sm like-button"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i> (15)</button>
+                    <button type="button" class="btn btn-default btn-sm dislike-button"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i> (2)</button>
+                      <form class="collapse collapse-write-comment" id="'.$alphanumToken.'">
+                        <div class="form-group">
+                          <label for="textpost-textarea" class="sr-only">Eingabefeld für Kommentar zum Post</label>
+                          <textarea class="form-control" name="Post-Text" id="textpost-textarea-mobile" placeholder="Kommentieren..."></textarea>
+                        </div>
+                      </form>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-xs-12 post-text">'.$text.'</div>
-                </div>
-                  <a class="btn btn-default comment-btn" href="'.$link.'" target="-blank"><i class="fa fa-caret-right fa-lg" aria-hidden="true"></i>'." ".$link.'</a>
-                <div class="row post-interaction-row">
-                <a class="btn btn-default btn-sm comment-btn" role="button" data-toggle="collapse" href="#'.$alphanumToken.'" aria-expanded="false" aria-controls="'.$alphanumToken.'">
-                Kommentieren (3)
-                </a>
-                <button type="button" class="btn btn-default btn-sm like-button"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i> (15)</button>
-                <button type="button" class="btn btn-default btn-sm dislike-button"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i> (2)</button>
-                  <form class="collapse collapse-write-comment" id="'.$alphanumToken.'">
-                    <div class="form-group">
-                      <label for="textpost-textarea" class="sr-only">Eingabefeld für Posts</label>
-                      <textarea class="form-control" name="Post-Text" id="textpost-textarea-mobile" placeholder="Kommentieren..."></textarea>
-                    </div>
-                  </form>
-                </div>
-              </div>';
+              </article>';
 
       echo $post;
 
@@ -224,52 +234,56 @@ try {
 
       $image_directory_path = "./image-uploads/{$image_name}.jpg";
 
-      $post = '<div class="container-fluid post">
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="post-avatar-cell">
-                      <img src="'.$avatar.'" class="img-rounded post-user-avatar">
+      $post = '<article class="posts box-with-padding">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-sm-12 no-padding">
+                      <div class="dropdown pull-right">
+                        <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown"><i class="fa fa-ellipsis-h fa-lg post-options-symbol" aria-hidden="true"></i></button>
+                        <ul class="dropdown-menu">
+                          <li>
+                          <form action="" method="post">
+                            <span class="form-group">
+                              <input type="hidden" name="post-id" value="'.$post_id.'">
+                              <input type="hidden" name="post-user-id" value="'.$post_user_id.'">
+                              <input type="hidden" name="current-user-id" value="'.$current_user_id.'">
+                              <input type="hidden" name="securityToken" value="'.$securityToken.'">
+                              <label for="delete-post" class="sr-only">Post löschen</label>
+                              <button type="submit" class="form-control delete-post-button" name="delete-post"><i class="fa fa-trash" aria-hidden="true"></i> Post löschen</button>
+                            </span>
+                          </form>
+                          </li>
+                          <li><a href="#"><i class="fa fa-flag" aria-hidden="true"></i> Post melden</a></li>
+                        </ul>
+                      </div>
+                      <img src="'.$avatar.'" class="img-rounded post-avatar">
+                      <h4 class="posted-by-username">'.$username.'</h4>
+                      <h5 class="posted-at-text">'.$posted_at.'</h5><br />
                     </div>
-                    <div class="dropdown pull-right">
-                      <button class="btn btn-default dropdown-toggle btn-xs post-options-btn" type="button" data-toggle="dropdown"><i class="fa fa-ellipsis-h fa-lg post-options-symbol" aria-hidden="true"></i></button>
-                      <ul class="dropdown-menu post-options-dropdown">
-                        <li>
-                        <form method="post" action="">
-                          <span class="form-group">
-                            <input type="hidden" name="post-id" value="'.$post_id.'">
-                            <input type="hidden" name="post-user-id" value="'.$post_user_id.'">
-                            <input type="hidden" name="current-user-id" value="'.$current_user_id.'">
-                            <input type="hidden" name="securityToken" value="'.$securityToken.'">
-                            <label for="delete-post" class="sr-only">Post löschen</label>
-                            <button type="submit" class="form-control delete-post-button" name="delete-post"><i class="fa fa-trash" aria-hidden="true"></i> Post löschen</button>
-                          </span>
-                        </form>
-                        </li>
-                        <li><a href="#"><i class="fa fa-flag" aria-hidden="true"></i> Post melden</a></li>
-                      </ul>
+                  </div>
+                  <div class="row post-row">
+                    <div class="col-xs-12 post-text no-padding">'.$text.'</div>
+                  </div>
+                  <div class="row post-row">
+                    <div class="col-xs-12 no-padding">
+                      <img src="'.$image_directory_path.'" class="posted-image">
                     </div>
-                    <h4 class="posted-by-username">'.$username.'</h4>
-                    <h5 class="posted-at-text">'.$posted_at.'</h5><br />
+                  </div>
+                  <div class="row post-interaction-row">
+                    <a class="btn btn-default btn-sm comment-btn" role="button" data-toggle="collapse" href="#'.$alphanumToken.'" aria-expanded="false" aria-controls="'.$alphanumToken.'">
+                    Kommentieren (3)
+                    </a>
+                    <button type="button" class="btn btn-default btn-sm like-button"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i> (15)</button>
+                    <button type="button" class="btn btn-default btn-sm dislike-button"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i> (2)</button>
+                      <form class="collapse collapse-write-comment" id="'.$alphanumToken.'">
+                        <div class="form-group">
+                          <label for="textpost-textarea" class="sr-only">Eingabefeld für Kommentar zum Post</label>
+                          <textarea class="form-control" name="Post-Text" id="textpost-textarea-mobile" placeholder="Kommentieren..."></textarea>
+                        </div>
+                      </form>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-xs-12 post-text">'.$text.'</div>
-                </div>
-                  <img src="'.$image_directory_path.'" class="posted-image">
-                <div class="row post-interaction-row">
-                <a class="btn btn-default btn-sm comment-btn" role="button" data-toggle="collapse" href="#'.$alphanumToken.'" aria-expanded="false" aria-controls="'.$alphanumToken.'">
-                Kommentieren (3)
-                </a>
-                <button type="button" class="btn btn-default btn-sm like-button"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i> (15)</button>
-                <button type="button" class="btn btn-default btn-sm dislike-button"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i> (2)</button>
-                  <form class="collapse collapse-write-comment" id="'.$alphanumToken.'">
-                    <div class="form-group">
-                      <label for="textpost-textarea" class="sr-only">Eingabefeld für Posts</label>
-                      <textarea class="form-control" name="Post-Text" id="textpost-textarea-mobile" placeholder="Kommentieren..."></textarea>
-                    </div>
-                  </form>
-                </div>
-              </div>';
+              </article>';
 
       echo $post;
 
