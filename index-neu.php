@@ -154,11 +154,11 @@ include_once("./src/php/post-system/post-utilities-script.php");
 
 <!-- POSTS ================================================== -->
 
-      <article class="posts">
+      <article class="posts box-with-padding">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-sm-12">
-              <img src="'.$avatar.'" class="img-rounded">
+            <div class="col-sm-12 no-padding">
+              <!-- POST ACTIONS DROPDOWN ================================================== -->
               <div class="dropdown pull-right">
                 <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown"><i class="fa fa-ellipsis-h fa-lg post-options-symbol" aria-hidden="true"></i></button>
                 <ul class="dropdown-menu">
@@ -177,12 +177,64 @@ include_once("./src/php/post-system/post-utilities-script.php");
                   <li><a href="#"><i class="fa fa-flag" aria-hidden="true"></i> Post melden</a></li>
                 </ul>
               </div>
+              <!-- POST HEADER ================================================== -->
+              <img src="avatar-uploads/RUBEN.jpg" class="img-rounded post-avatar">
               <h4 class="posted-by-username">RUBEN</h4>
               <h5 class="posted-at-text">14. Mai 2017</h5><br />
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-12 post-text">
+            <div class="col-xs-12 post-text no-padding">
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            </div>
+          </div>
+          <div class="row post-interaction-row">
+            <a class="btn btn-default btn-sm comment-btn" role="button" data-toggle="collapse" href="#'.$alphanumToken.'" aria-expanded="false" aria-controls="'.$alphanumToken.'">
+            Kommentieren (3)
+            </a>
+            <button type="button" class="btn btn-default btn-sm like-button"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i> (15)</button>
+            <button type="button" class="btn btn-default btn-sm dislike-button"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i> (2)</button>
+              <form class="collapse collapse-write-comment" id="'.$alphanumToken.'">
+                <div class="form-group">
+                  <label for="textpost-textarea" class="sr-only">Eingabefeld für Kommentar zum Post</label>
+                  <textarea class="form-control" name="Post-Text" id="textpost-textarea-mobile" placeholder="Kommentieren..."></textarea>
+                </div>
+              </form>
+          </div>
+        </div>
+      </article>
+
+      <article class="posts box-with-padding">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-12 no-padding">
+              <!-- POST ACTIONS DROPDOWN ================================================== -->
+              <div class="dropdown pull-right">
+                <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown"><i class="fa fa-ellipsis-h fa-lg post-options-symbol" aria-hidden="true"></i></button>
+                <ul class="dropdown-menu">
+                  <li>
+                  <form action="" method="post">
+                    <span class="form-group">
+                      <input type="hidden" name="post-id" value="'.$post_id.'">
+                      <input type="hidden" name="post-user-id" value="'.$post_user_id.'">
+                      <input type="hidden" name="current-user-id" value="'.$current_user_id.'">
+                      <input type="hidden" name="securityToken" value="'.$securityToken.'">
+                      <label for="delete-post" class="sr-only">Post löschen</label>
+                      <button type="submit" class="form-control delete-post-button" name="delete-post"><i class="fa fa-trash" aria-hidden="true"></i> Post löschen</button>
+                    </span>
+                  </form>
+                  </li>
+                  <li><a href="#"><i class="fa fa-flag" aria-hidden="true"></i> Post melden</a></li>
+                </ul>
+              </div>
+              <!-- POST HEADER ================================================== -->
+              <img src="avatar-uploads/RUBEN.jpg" class="img-rounded post-avatar">
+              <h4 class="posted-by-username">RUBEN</h4>
+              <h5 class="posted-at-text">14. Mai 2017</h5><br />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 post-text no-padding">
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
             </div>
           </div>

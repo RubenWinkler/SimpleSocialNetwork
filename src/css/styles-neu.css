@@ -3,9 +3,8 @@
 html, body {
   height: 100%;
   min-height: 100%;
-  padding: 0 0 0 0;
-  margin-left: 0 0 0 0;
-}
+  padding: 0;
+  margin-left: 0}
 
 /* === GLOBAL ===*/
 
@@ -28,6 +27,10 @@ html, body {
 
 .box-with-padding {
   padding: 20px 30px 20px 30px;
+}
+
+.no-padding {
+  padding: 0;
 }
 
 /* === HEADER-NAVIGATION ===*/
@@ -87,7 +90,7 @@ a#user {
   .collapse.in{
       display:block !important;
   }
-  
+
 }
 
 /* === LEFT-SIDEBAR ===*/
@@ -146,6 +149,27 @@ a#user {
 /* === FILTER-WELL ===*/
 
 /* === POSTS ===*/
+
+article.posts {
+  margin-top: 20px;
+  box-shadow: 0px 0px 1px 1px rgba(0,0,0,0.13);
+  border-radius: 1px;
+}
+
+img.post-avatar {
+  width: 50px;
+  height: 50px;
+  float: left;
+  margin-right: 15px;
+}
+
+h4.posted-by-username {
+  margin-top: 5px;
+}
+
+div.post-text {
+  margin-bottom: 15px;
+}
 
 /* === RIGHT-SIDEBAR ===*/
 
