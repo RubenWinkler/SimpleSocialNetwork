@@ -1,9 +1,3 @@
-<?php
-include_once("./src/php/login-system/session-script.php");
-include_once("./src/php/login-system/database-connection-script.php");
-include_once("./src/php/login-system/utilities-script.php");
-?>
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -45,4 +39,7 @@ include_once("./src/php/login-system/utilities-script.php");
   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
 </head>
-<body class="container-fluid" id="body">
+
+<!-- BODY ================================================== -->
+
+<body>

@@ -123,7 +123,6 @@ if ((isset($_SESSION["id"]) || isset($_GET["user-identity"])) && !isset($_POST["
 
     if (empty($form_errors)) {
 
-
       try {
 
         $sqlUpdate = "UPDATE users SET username =:username, email =:email WHERE id =:id";

@@ -135,5 +135,4 @@ function decodeAnything ($encodedVersion) {
   return $decodedSomething;
 
 }
-
  ?>

@@ -1,48 +1,48 @@
 <?php
-if (isset($_SESSION["username"])) {$page_title = "{$_SESSION['username']} - DIVISION Network";} else {$page_title = "DIVISION Network";}
-include_once("./src/assets/head.php");
+if (isset($_SESSION["username"])) {$page_title = "Edit Profile";} else {$page_title = "The Simple Social Network";}
+include_once("./src/php/login-system/session-script.php");
+include_once("./src/php/login-system/database-connection-script.php");
+include_once("./src/php/login-system/utilities-script.php");
 include_once("./src/php/login-system/profile-script.php");
-include_once("./src/assets/header.php");
 ?>
 
-<div class="container-fluid" id="content">
-    <?php include_once("./src/assets/left-sidebar.php"); ?>
-      <div class="col-md-6 col-sm-8 col-xs-12" id="main-content-container">
-        <div class="profile-container">
-          <h1>Profil bearbeiten</h1>
-          <div>
-            <?php if (isset($result)) {echo $result;} ?>
-            <?php if (!empty($form_errors)) {echo show_errors($form_errors);} ?>
-            <?php if (isset($result)) {echo '</div>';} ?>
-          </div>
-          <?php if (!isset($_SESSION["username"])): ?>
-            <p> Die Profile sind nur für Mitglieder sichtbar. <a href="login.php">Melde dich bitte an!</a><br /><br />
-                Du bist noch kein Mitglied? <a href="signup.php">Registriere dich jetzt!</a></p>
-          <?php else: ?>
-              <form method="post" action="" enctype="multipart/form-data">
-                <div class="form-group">
-                  <lable for="E-Mail">E-Mail</lable>
-                  <input type="text" name="E-Mail" class="form-control" id="E-Mail" value="<?php if (isset($email)) { echo $email; } ?>">
-                </div>
-                <div class="form-group">
-                  <lable for="Benutzername">Benutzername</lable>
-                  <input type="text" name="Benutzername" class="form-control" id="Benutzername" value="<?php if (isset($username)) { echo $username; } ?>">
-                </div>
-                <input type="hidden" name="hidden-id" value="<?php if (isset($id)) { echo $id; } ?>">
-                <input type="hidden" name="token" value="<?php if (function_exists('_token')) { echo _token(); } ?>">
-                <button type="submit" name="edit-profile-button" class="btn btn-default pull-right">Speichern</button><br />
-              </form>
-              <br />
-              <br />
-              <p><a href="profile.php">Zurück zum Profil</a></p>
-          <?php endif ?>
-        </div>
-    </div>
-    <div class="col-lg-2 col-md-4 col-sm-4 hidden-xs" id="right-sidebar-col">
-      <div id="right-sidebar">
-      <?php include_once("./src/assets/widgets/social-nav-widget/social-nav-widget.php"); ?>
+<!-- FOUR COLUMN LAYOUT START ================================================== -->
+<?php include_once("./src/assets/four-column-layout/four-column-layout-start.php"); ?>
+
+  <?php if (!isset($_SESSION["username"])): ?>
+  <p> Die Profile sind nur für Mitglieder sichtbar. <a href="login.php">Melde dich bitte an!</a><br /><br />
+      Du bist noch kein Mitglied? <a href="signup.php">Registriere dich jetzt!</a></p>
+  <?php else: ?>
+
+  <!-- EDIT PROFILE ================================================== -->
+    <h2 class="form-elements">Profil bearbeiten</h2>
+    <div class="row">
+      <div class="col-xs-12">
+          <?php if (isset($result)) {echo $result;} ?>
+          <?php if (!empty($form_errors)) {echo show_errors($form_errors);} ?>
+          <?php if (isset($result)) {echo '</div>';} ?>
       </div>
     </div>
-    <?php include_once("./src/assets/widgets/chat-widget/chat-widget.php"); ?>
-</div>
-<?php include_once("./src/assets/footer.php"); ?>
+    <form method="post" action="" enctype="multipart/form-data">
+      <div class="form-group form-elements">
+        <lable for="E-Mail">E-Mail</lable>
+        <input type="text" name="E-Mail" class="form-control" id="E-Mail" value="<?php if (isset($email)) { echo $email; } ?>">
+      </div>
+      <div class="form-group form-elements">
+        <lable for="Benutzername">Benutzername</lable>
+        <input type="text" name="Benutzername" class="form-control" id="Benutzername" value="<?php if (isset($username)) { echo $username; } ?>">
+      </div>
+      <div class="form-elements">
+        <input type="hidden" name="hidden-id" value="<?php if (isset($id)) { echo $id; } ?>">
+        <input type="hidden" name="token" value="<?php if (function_exists('_token')) { echo _token(); } ?>">
+        <button type="submit" name="edit-profile-button" class="btn btn-default pull-right">Speichern</button><br />
+      </div>
+    </form>
+    <br />
+    <br />
+    <p class="form-elements"><a href="profile.php">Zurück zum Profil</a></p>
+
+  <?php endif ?>
+
+<!-- FOUR COLUMN LAYOUT END ================================================== -->
+<?php include_once("./src/assets/four-column-layout/four-column-layout-end.php"); ?>

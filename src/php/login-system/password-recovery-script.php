@@ -12,7 +12,7 @@ if (isset($_POST["password-reset-button"], $_POST["token"])) {
     $form_errors = array();
 
     // werden alle Pflichfelder, die zu überprüfen sind, definiert,
-    $required_fields = array("Neues-Passwort", "Neues-Passwort-bestätigen");
+    $required_fields = array("E-Mail", "Token", "Neues-Passwort", "Neues-Passwort-bestätigen", );
 
     // wird die Funktion check_empty_fields() aufgerufen und ihr Rückgabewert in das $form_errors-Array gemerged,
     $form_errors = array_merge($form_errors, check_empty_fields($required_fields));
@@ -26,8 +26,10 @@ if (isset($_POST["password-reset-button"], $_POST["token"])) {
     //Wenn dann noch immer das $form_errors-Array leer ist,
     if (empty($form_errors)) {
 
-        // wird $id auf $_POST["user_id"] gesetzt,
-        $id = $_POST["user-id"];
+        // wird $email auf $_POST["E-Mail"] gesetzt,
+        $email = $_POST["E-Mail"];
+        // wird $reset_token auf $_POST["Token"] gesetzt,
+        $reset_token = $_POST["Token"];
         // wird $password1 auf $_POST["Neues_Passwort"] gesetzt und
         $password1 = $_POST["Neues-Passwort"];
         // wird $password2 auf $_POST["Neues_Passwort_bestätigen"] gesetzt.
@@ -45,44 +47,100 @@ if (isset($_POST["password-reset-button"], $_POST["token"])) {
           // wird
           try {
 
-            // ein SQL-Statement in der Variablen $sqlQuery zusammengesetzt,
-            $sqlQuery = "SELECT email FROM users WHERE id =:id";
-            // das SQL-Statement vorbereitet und
-            $statement = $db->prepare($sqlQuery);
-            // das SQL-Statement ausgeführt.
-            $statement->execute(array(":id" => $id));
+            // Token und E-Mail Adresse validiert
+            $query = "SELECT * FROM password_recovery WHERE email = :email";
 
-            // Wenn eine Row durch die Ausführung des SQL-Statements betroffen ist,
-            if ($statement->rowCount() == 1) {
+            $queryStatement = $db->prepare($query);
 
-              // wird das neue Passwort verschlüssel und in $hashed_password gespeichert,
-              $hashed_password = password_hash($password1, PASSWORD_DEFAULT);
+            $queryStatement->execute([":email" => $email]);
 
-              // ein SQL-Statement in der Variablen $sqlUpdate zusammengesetzt,
-              $sqlUpdate = "UPDATE users SET password =:password WHERE id =:id";
-              // das SQL-Statement vorbereitet,
-              $statement = $db->prepare($sqlUpdate);
-              // das SQL-Statement ausgeführt und
-              $statement->execute(array(":password" => $hashed_password, ":id" => $id));
+            $isValid = true;
 
-              // ein passender Success-Sweet-Alert ausgegeben.
-              echo $password_changed = "<script type=\"text/javascript\">
-                              swal({
-                              title: \"Passwort wurde geändert!\",
-                              text: \"Du kannst dich jetzt mit deinem neuen Passwort anmelden.\",
-                              type: \"success\",
-                              closeOnConfirm: false
-                              },
-                              function(){
-                                window.location.href = 'login.php';
-                              });
-                              </script>";
+            if ($rows = $queryStatement->fetch()) {
 
-              // Wenn mehr als eine Row oder keine Row durch die Ausführung des SQL-Statements betroffen ist,
+              $stored_token = $rows["token"];
+
+              $expire_time = $rows["expire_time"];
+
+              if ($stored_token !== $reset_token) {
+
+                $isValid = false;
+
+                $result = flashMessage("Du hast ein ungültiges Token eingegeben.");
+
+              }
+
+              if ($expire_time < date("Y-m-d H-i-s")) {
+
+                $isValid = false;
+
+                $result = flashMessage("Das von dir genutzte Token ist abgelaufen. Fordere ein neues an.");
+
+                // Token löschen
+                $db->exec("DELETE FROM password_recovery WHERE email = '$email' AND token = '$reset_token'");
+
+              }
+
             } else {
 
-              // wird eine Fehlermeldung ausgegeben.
-              $result = flashMessage("Die von dir eingegebene E-Mail Adresse existiert nicht.");
+              $isValid = false;
+
+              goto invalid_email;
+
+            }
+
+            // Wenn das Token valide ist
+            if ($isValid) {
+
+              // ein SQL-Statement in der Variablen $sqlQuery zusammengesetzt,
+              $sqlQuery = "SELECT email FROM users WHERE email =:email";
+              // das SQL-Statement vorbereitet und
+              $statement = $db->prepare($sqlQuery);
+              // das SQL-Statement ausgeführt.
+              $statement->execute([":email" => $email]);
+
+              // Wenn eine Row durch die Ausführung des SQL-Statements betroffen ist,
+              if ($rs = $statement->fetch()) {
+
+                // wird das neue Passwort verschlüssel und in $hashed_password gespeichert,
+                $hashed_password = password_hash($password1, PASSWORD_DEFAULT);
+
+                // ein SQL-Statement in der Variablen $sqlUpdate zusammengesetzt,
+                $sqlUpdate = "UPDATE users SET password =:password WHERE email =:email";
+                // das SQL-Statement vorbereitet,
+                $statement = $db->prepare($sqlUpdate);
+                // das SQL-Statement ausgeführt und
+                $statement->execute(array(":password" => $hashed_password, ":email" => $email));
+
+                if ($statement->rowCount() == 1) {
+
+                  // Token löschen
+                  $db->exec("DELETE FROM password_recovery WHERE email = '$email' AND token = '$reset_token'");
+
+                }
+
+                // ein passender Success-Sweet-Alert ausgegeben.
+                $result = "<script type=\"text/javascript\">
+                            swal({
+                            title: \"Passwort wurde geändert!\",
+                            text: \"Du kannst dich jetzt mit deinem neuen Passwort anmelden.\",
+                            type: \"success\",
+                            closeOnConfirm: false
+                            },
+                            function(){
+                              window.location.href = 'login.php';
+                            });
+                            </script>";
+
+                // Wenn mehr als eine Row oder keine Row durch die Ausführung des SQL-Statements betroffen ist,
+              } else {
+
+                invalid_email:
+
+                // wird eine Fehlermeldung ausgegeben.
+                $result = flashMessage("Die von dir eingegebene E-Mail Adresse existiert nicht.");
+
+              }
 
             }
 
@@ -161,31 +219,38 @@ if (isset($_POST["password-reset-button"], $_POST["token"])) {
           $username = $row["username"];
           // $email auf $row["email"] gesetzt,
           $email = $row["email"];
-          // $user_id auf $row["id"] gesetzt,
-          $user_id = $row["id"];
-          // die User-ID enkodiert,
-          $encode_id = base64_encode("JHf33QTa56afÜh32aURCdjY5H{$user_id}");
+          // Auslaufzeit des Tokens wird generiert
+          $expire_time = date("Y-m-d H-i-s", strtotime("1 hour"));
+          // Zufälligen String aus Großbuchstaben ohne Sonderzeichen erzeugen
+          $reset_token = strtoupper(preg_replace("/[^A-Za-z0-9\-]/", "", base64_encode(openssl_random_pseudo_bytes(10))));
+
+          $insertToken = "INSERT INTO password_recovery (email, token, expire_time) VALUES (:email, :token, :expire_time)";
+
+          $token_statement = $db->prepare($insertToken);
+
+          $token_statement->execute([":email" => $email, ":token" => $reset_token, ":expire_time" => $expire_time]);
 
           // die Passwort-Recovery-Link E-Mail in $mail_body gespeichert,
           $mail_body = '<html>
                         <head>
                             <meta charset="utf-8">
-                            <title>Passwort zurücksetzen</title>
+                            <title>Passwort Recovery</title>
                             <style type="text/css">
                             </style>
                         </head>
                         <body style="background-color:#CCCCCC; color:#000; font-family: Arial, Helvetica, sans-serif;
                                             line-height:1.8em;">
-                        <h2>Passwort zurücksetzen</h2>
-                        <p>Hallo '.$username.',<br><br>Um dein Passwort zurückzusetzen, klicke einfach auf den folgenden Link:</p>
-                        <p><a href="http://localhost/DIVISION-Network/pages/forgot-password.php?id='.$encode_id.'"> Passwort zurücksetzen</a></p>
-                        <p><strong>&copy;2017 DIVISION Network</strong></p>
+                        <h2>Recover your Password</h2>
+                        <p>Hello '.$username.',<br><br>To recover your password, copy the token below and click on the "Recover-Password" link.</p>
+                        <p>Token: '.$reset_token.'
+                        <p><a href="http://localhost/SimpleSocialNetwork/password-recovery.php">Recover Password</a></p>
+                        <p><strong>&copy;'.date("Y").' The Simple Social Network</strong></p>
                         </body>
                         </html>';
           // der Adressat mit der im Formular eingegebenen E-Mail Adresse und dem Benutzernamen hinzugefügt,
           $mail->addAddress($email, $username);
           // der Betreff der E-Mail auf "DIVISION Network: Passwort zurücksetzen" gesetzt und
-          $mail->Subject = "DIVISION Network: Passwort zurücksetzen";
+          $mail->Subject = "The Simple Social Network: Password Recovery";
           // der Inhalt (Body) der E-Mail auf den eben definierten $mail_body gesetzt.
           $mail->Body = $mail_body;
 

@@ -1,5 +1,5 @@
 <?php
-include_once ("./src/php/login-system/database-connection.php");
+include_once ("./src/php/login-system/database-connection-script.php");
 include_once ("./src/php/login-system/utilities-script.php");
 include_once ("./src/php/login-system/send-email-gmail.php");
 

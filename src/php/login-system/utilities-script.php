@@ -191,13 +191,13 @@ function flashMessage ($message, $passOrFail = "Fail") {
   if ($passOrFail === "Pass") {
 
     // wird eine Erfolgsmeldung ausgegeben.
-    $alert = "<div class='alert alert-success' role='alert' id='login-system-alertbox'>{$message}";
+    $alert = "<div class='alert alert-success form-elements' role='alert'>{$message}";
 
     // Wenn $passOrFail auf "Fail" steht,
   } else {
 
     // wird eine Fehlermeldung ausgegeben.
-    $alert = "<div class='alert alert-danger' role='alert' id='login-system-alertbox'>{$message}";
+    $alert = "<div class='alert alert-danger form-elements' role='alert'>{$message}";
   }
 
   // Die Erfolgs- bzw. Fehlermeldung wird zurückgegeben.
@@ -739,5 +739,49 @@ function prepareLogin($id, $username, $remember) {
                   window.location.href = 'index.php';
                 }, 2000);
                   </script>";
+}
+
+
+
+function translateDateToGerman ($date) {
+
+	switch ($date) {
+		case strpos($date, "January") == true:
+			$date = str_replace("January", "Januar", $date);
+			break;
+		case strpos($date, "February") == true:
+			$date = str_replace("February", "Februar", $date);
+			break;
+		case strpos($date, "March") == true:
+			$date = str_replace("March", "März", $date);
+			break;
+		case strpos($date, "April") == true:
+			$date = str_replace("April", "April", $date);
+			break;
+		case strpos($date, "May") == true:
+			$date = str_replace("May", "Mai", $date);
+			break;
+		case strpos($date, "June") == true:
+			$date = str_replace("June", "Juni", $date);
+			break;
+		case strpos($date, "July") == true:
+			$date = str_replace("July", "Juli", $date);
+			break;
+		case strpos($date, "August") == true:
+			$date = str_replace("August", "August", $date);
+			break;
+		case strpos($date, "October") == true:
+			$date = str_replace("October", "Oktober", $date);
+			break;
+		case strpos($date, "November") == true:
+			$date = str_replace("November", "November", $date);
+			break;
+		case strpos($date, "December") == true:
+			$date = str_replace("December", "Dezember", $date);
+			break;
+	}
+
+	return $date;
+
 }
 ?>
