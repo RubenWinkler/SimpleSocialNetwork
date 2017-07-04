@@ -20,9 +20,9 @@ $page_title = "Signup";
     </div>
     <div class="row">
       <div class="col-xs-12">
-        <?php if (isset($result)) {echo $result;} ?>
-        <?php if (!empty($form_errors)) {echo show_errors($form_errors);} ?>
-        <?php if (isset($result)) {echo '</div>';} ?>
+          <?php if (isset($result)) {echo $result;} ?>
+          <?php if (!empty($form_errors)) {echo show_errors($form_errors);} ?>
+          <?php if (isset($result)) {echo '</div>';} ?>
       </div>
     </div>
     <div class="form-group">
