@@ -16,11 +16,11 @@ if (isset($_SESSION["username"])) {$page_title = "Profile: {$_SESSION["username"
 
   <!-- PROFILE ================================================== -->
   <section class="banner-picture-container">
-    <div class="profile-banner" style="background-image: url(<?php if (isset($profile_banner)) { echo $profile_banner; } ?>)">
+    <div class="profile-banner" style="background-image: url(<?php if (isset($banner)) { echo $banner; } ?>)">
       <a href="change-profile-banner.php?user_identity=<?php if (isset($encode_id)) {echo $encode_id;} ?>"><span class="glyphicon glyphicon-edit" id="edit-banner-glyphicon"></span></a>
     </div>
     <div class="profile-picture-container img-thumbnail">
-      <div class="profile-picture" style="background-image: url(<?php if (isset($profile_picture)) { echo $profile_picture; } ?>)">
+      <div class="profile-picture" style="background-image: url(<?php if (isset($avatar)) { echo $avatar; } ?>)">
         <a href="change-profile-picture.php?user_identity=<?php if (isset($encode_id)) {echo $encode_id;} ?>"><span class="glyphicon glyphicon-edit" id="edit-profile-picture-glyphicon"></span></a>
       </div>
     </div>

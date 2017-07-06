@@ -3,7 +3,7 @@ include_once("./src/php/login-system/session-script.php");
 include_once("./src/php/login-system/database-connection-script.php");
 include_once("./src/php/login-system/utilities-script.php");
 include_once("./src/php/login-system/profile-script.php");
-if (isset($_SESSION["username"])) {$page_title = "Change Profile Picture";} else {$page_title = "The Simple Social Network";}
+if (isset($_SESSION["username"])) {$page_title = "Change Profile Banner";} else {$page_title = "The Simple Social Network";}
 ?>
 
 <!-- FOUR COLUMN LAYOUT START ================================================== -->
@@ -15,7 +15,7 @@ if (isset($_SESSION["username"])) {$page_title = "Change Profile Picture";} else
   <?php else: ?>
 
   <!-- ADD YOUR CONTENT HERE ================================================== -->
-    <h2 class="form-elements">Profilbild ändern</h2>
+    <h2 class="form-elements">Profilbanner ändern</h2>
     <div class="row">
       <div class="col-xs-12">
           <?php if (isset($result)) {echo $result;} ?>

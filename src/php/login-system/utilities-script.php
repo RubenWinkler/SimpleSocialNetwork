@@ -561,27 +561,24 @@ function signout () {
      // wird der temporäre Dateiname unter dem die Datei auf dem Server gespeichert wurde, gespeichert,
      $temp_file = $_FILES["Profilbild"]["tmp_name"];
 
-     // wird ein Dateipfand-Separator in $dir_seperator gespeichert,
-     $dir_seperator = DIRECTORY_SEPARATOR;
+     // wird die Datei-Erweiterung gespeichert,
+     $ext = pathinfo($_FILES["Profilbild"]["name"], PATHINFO_EXTENSION);
 
      // wird der gewünschte Dateiname aus $username und dem Dateiformat ".jpg" zusammengesetzt und in $avatar_name gespeichert und
-     $avatar_name = $username . ".jpg";
+     $filename = $username.md5(microtime()).".{$ext}";
 
      // wird der gewünschte Dateipfad, unter dem die Datei auf dem Server gespeichert wurde, in der Variablen $path gespeichert.
-     $path = "./avatar-uploads" . $dir_seperator . $avatar_name;
+     $path = "avatar-uploads/{$filename}";
 
-     // Wenn außerdem, die Datei erfolgreich zum gewünschten Pfad verschoben wurde,
-     if (move_uploaded_file($temp_file, $path)) {
+     // Die Datei wird an den gewünschten Ort verschoben.
+     move_uploaded_file($temp_file, $path);
 
-      // wird $isImageMoved (der Indikator, ob die Datei verschoben wurde oder nicht) auf true (verschoben) gesetzt.
-      $isImageMoved = true;
-
-      }
+     return $path;
 
     }
 
-    // Es wird $isImageMoved (der Indikator, ob die Datei verschoben wurde oder nicht) zurückgegeben.
-    return $isImageMoved;
+    // Es wird false zurückgegeben, wenn der Nutzer kein Bild hochgeladen hat.
+    return false;
 
  }
 
@@ -619,27 +616,24 @@ function signout () {
      // wird der temporäre Dateiname unter dem die Datei auf dem Server gespeichert wurde, gespeichert,
      $temp_file = $_FILES["Profilbanner"]["tmp_name"];
 
-     // wird ein Dateipfand-Separator in $dir_seperator gespeichert,
-     $dir_seperator = DIRECTORY_SEPARATOR;
+     // wird die Datei-Erweiterung gespeichert,
+     $ext = pathinfo($_FILES["Profilbanner"]["name"], PATHINFO_EXTENSION);
 
      // wird der gewünschte Dateiname aus $username und dem Dateiformat ".jpg" zusammengesetzt und in $banner_name gespeichert und
-     $banner_name = $username . ".jpg";
+     $filename = $username.md5(microtime()).".{$ext}";
 
      // wird der gewünschte Dateipfad, unter dem die Datei auf dem Server gespeichert wurde, in der Variablen $path gespeichert.
-     $path = "./banner-uploads" . $dir_seperator . $banner_name;
+     $path = "banner-uploads/{$filename}";
 
-     // Wenn außerdem, die Datei erfolgreich zum gewünschten Pfad verschoben wurde,
-     if (move_uploaded_file($temp_file, $path)) {
+     // Die Datei wird an den gewünschten Ort verschoben.
+     move_uploaded_file($temp_file, $path);
 
-       // wird $isBannerMoved (der Indikator, ob die Datei verschoben wurde oder nicht) auf true (verschoben) gesetzt.
-       $isBannerMoved = true;
-
-      }
+     return $path;
 
     }
 
-    // Es wird $isBannerMoved (der Indikator, ob die Datei verschoben wurde oder nicht) zurückgegeben.
-    return $isBannerMoved;
+    // Es wird false zurückgegeben, wenn der Nutzer kein Bild hochgeladen hat.
+    return false;
 
  }
 
@@ -784,4 +778,3 @@ function translateDateToGerman ($date) {
 	return $date;
 
 }
-?>

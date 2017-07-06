@@ -2,6 +2,35 @@
 include_once("./src/php/login-system/database-connection-script.php");
 include_once("./src/php/login-system/utilities-script.php");
 
+if (isset($_GET["u"])) {
+
+  $username = $_GET["u"];
+
+  // ein SQL-Statement in der Variablen $sqlQuery zusammengesetzt,
+  $sqlQuery = "SELECT * FROM users WHERE username = :username";
+  // das SQL-Statement vorbereitet und
+  $statement = $db->prepare($sqlQuery);
+  // das SQL-Statement ausgeführt.
+  $statement->execute(array(":username" => $username));
+
+  // Wenn außerdem $statement->fetch() einen Rückgabewert liefert, wird dieser in $row gespeichert und
+  if ($rs = $statement->fetch()) {
+
+    // $username auf $row["username"] gesetzt,
+    $member_username = $rs["username"];
+    // $email auf $row["email"] gesetzt und
+    $member_email = $rs["email"];
+    // $avatar auf $row["avatar"] gesetzt und
+    $member_avatar = $rs["avatar"];
+	  // $banner auf $row["banner"] gesetzt und
+    $member_banner = $rs["banner"];
+    // das Beitrittsdatum auf $row["join_date"] gesetzt (die Funktionen dienen dazu aus time() ein Datum zu machen).
+    $member_join_date = strftime("%d. %B %Y", strtotime($rs["join_date"]));
+
+  }
+
+}
+
 // Wenn $_SESSION["id"] gesetzt ist (der Benutzer eingeloggt ist),
 if ((isset($_SESSION["id"]) || isset($_GET["user-identity"])) && !isset($_POST["edit-profile-button"])) {
 
@@ -31,35 +60,12 @@ if ((isset($_SESSION["id"]) || isset($_GET["user-identity"])) && !isset($_POST["
     $username = $rs["username"];
     // $email auf $row["email"] gesetzt und
     $email = $rs["email"];
+    // $avatar auf $row["avatar"] gesetzt und
+    $avatar = $rs["avatar"];
+	  // $banner auf $row["banner"] gesetzt und
+    $banner = $rs["banner"];
     // das Beitrittsdatum auf $row["join_date"] gesetzt (die Funktionen dienen dazu aus time() ein Datum zu machen).
     $join_date = strftime("%d. %B %Y", strtotime($rs["join_date"]));
-  }
-
-  $user_pic = "./avatar-uploads/" . $username . ".jpg";
-
-  $default_user_pic = "./avatar-uploads/default-avatar.jpg";
-
-  if (file_exists($user_pic)) {
-
-    $profile_picture = $user_pic;
-
-  } else {
-
-    $profile_picture = $default_user_pic;
-
-  }
-
-  $user_banner = "./banner-uploads/" . $username . ".jpg";
-
-  $default_user_banner = "./banner-uploads/default-banner.jpg";
-
-  if (file_exists($user_banner)) {
-
-    $profile_banner = $user_banner;
-
-  } else {
-
-    $profile_banner = $default_user_banner;
 
   }
 
@@ -125,13 +131,81 @@ if ((isset($_SESSION["id"]) || isset($_GET["user-identity"])) && !isset($_POST["
 
       try {
 
+        $avatar_query = "SELECT avatar FROM users WHERE id = :id";
+        $old_avatar_statement = $db->prepare($avatar_query);
+        $old_avatar_statement->execute([":id" => $hidden_id]);
+
+        if ($rs = $old_avatar_statement->fetch()) {
+
+          $old_avatar = $rs["avatar"];
+
+        }
+
+        $banner_query = "SELECT banner FROM users WHERE id = :id";
+        $old_banner_statement = $db->prepare($banner_query);
+        $old_banner_statement->execute([":id" => $hidden_id]);
+
+        if ($rs = $old_banner_statement->fetch()) {
+
+          $old_banner = $rs["banner"];
+
+        }
+
         $sqlUpdate = "UPDATE users SET username =:username, email =:email WHERE id =:id";
 
         $statement = $db->prepare($sqlUpdate);
 
-        $statement->execute(array(":username" => $username, ":email" => $email, ":id" => $hidden_id));
+        if ($avatar != NULL) {
 
-        if ($statement->rowCount() == 1 || uploadProfileBanner($username) || uploadProfilePicture($username)) {
+          $sqlUpdate = "UPDATE users SET username =:username, email =:email, avatar =:avatar WHERE id =:id";
+
+          $avatar_path = uploadProfilePicture($username);
+
+          if (!$avatar_path) {
+
+            $avatar_path = "avatar-uploads/default-avatar.jpg";
+
+          }
+
+          $statement = $db->prepare($sqlUpdate);
+
+          $statement->execute(array(":username" => $username, ":email" => $email, ":avatar" => $avatar_path, ":id" => $hidden_id));
+
+          if (isset($old_avatar)) {
+
+            unlink($old_avatar);
+
+          }
+
+        } elseif ($banner != NULL) {
+
+          $sqlUpdate = "UPDATE users SET username =:username, email =:email, banner =:banner WHERE id =:id";
+
+          $banner_path = uploadProfileBanner($username);
+
+          if (!$banner_path) {
+
+            $banner_path = "banner-uploads/default-banner.jpg";
+
+          }
+
+          $statement = $db->prepare($sqlUpdate);
+
+          $statement->execute(array(":username" => $username, ":email" => $email, ":banner" => $banner_path, ":id" => $hidden_id));
+
+          if (isset($old_banner)) {
+
+            unlink($old_banner);
+
+          }
+
+        } else {
+
+          $statement->execute(array(":username" => $username, ":email" => $email, ":id" => $hidden_id));
+
+        }
+
+        if ($statement->rowCount() == 1) {
 
           $_SESSION["username"] = $username;
 
@@ -153,13 +227,13 @@ if ((isset($_SESSION["id"]) || isset($_GET["user-identity"])) && !isset($_POST["
 
           $result = "<script type=\"text/javascript\">
                           swal({
-                          title: \"Ooops!\",
-                          text: \"Deine Account-Daten konnten nicht geändert werden.\",
+                          title: \"Profil nicht bearbeitet!\",
+                          text: \"Deine Profil wurde nicht bearbeitet. Versuch es noch einmal!\",
                           type: \"error\",
                           closeOnConfirm: false
                           },
                           function(){
-                            window.location.href = 'edit-profile.php';
+                            window.location.replace(window.location.href);
                           });
                           </script>";
         }

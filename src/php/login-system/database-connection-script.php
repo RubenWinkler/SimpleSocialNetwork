@@ -1,14 +1,21 @@
 <?php
 
+$config = require __DIR__ . "/../../../config/app.php";
+
+$driver = $config["database"]["driver"];
+$host = $config["database"]["host"];
+$dbname = $config["database"]["dbname"];
+$charset = $config["database"]["charset"];
+$db_username = $config["database"]["username"];
+$db_password = $config["database"]["password"];
+
 // Definition der nötigen Parameter zur Datenbankverbindung
-$dsn = "mysql:host=localhost;dbname=division network;charset=utf8";
-$username = "users";
-$password = "ZaJQ5mwxe3F3nz9n";
+$dsn = "{$driver}:host={$host};dbname={$dbname};charset={$charset}";
 
 try {
 
   // Mit der Datenbank mit dem Benutzer "ruben" verbinden und das generierte Passwort verwenden
-  $db = new PDO($dsn, $username, $password);
+  $db = new PDO($dsn, $db_username, $db_password);
 
   // Seltene Fälle von SQL-Injection werden mit "charset=utf8" (oberhalb) und dem
   // "setAttribute"-Befehl (unterhalb) umgangen.

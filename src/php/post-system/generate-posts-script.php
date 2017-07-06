@@ -26,19 +26,7 @@ try {
 
       $username = $user["username"];
 
-      $user_avatar = "avatar-uploads/{$username}.jpg";
-
-      $default_avatar = "avatar-uploads/default-avatar.jpg";
-
-      if (file_exists($user_avatar)) {
-
-        $avatar = $user_avatar;
-
-      } else {
-
-        $avatar = $default_avatar;
-
-      }
+      $avatar = $user["avatar"];
 
       $alphanumToken = _alphanumToken();
 

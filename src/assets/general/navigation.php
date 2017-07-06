@@ -33,7 +33,7 @@ include_once("./src/php/login-system/profile-script.php");
           <?php if (isset($_SESSION["username"]) || isCookieValid($db)): ?>
           <li>
             <a href="profile.php" id="user">
-              <img class="img-rounded hidden-xs" src="<?php if (isset($profile_picture)) { echo $profile_picture; } elseif (file_exists('./avatar-uploads/{$_SESSION["username"]}.jpg')) { echo './avatar-uploads/{$_SESSION["username"]}.jpg'; } ?>" id="header-navigation-avatar">
+              <img class="img-rounded hidden-xs" src="<?php if (isset($avatar)) { echo $avatar; } else { echo './avatar-uploads/default-avatar.jpg'; } ?>" id="header-navigation-avatar">
               <span id="username"><?php if (isset($_SESSION["username"])) { echo $_SESSION["username"]; } ?></span>
             </a>
           </li>
