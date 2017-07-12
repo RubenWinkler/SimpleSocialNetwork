@@ -110,6 +110,8 @@
 
     function getMessages (clicked_user, current_user) {
 
+      console.log("WURKS");
+
       var request = new XMLHttpRequest();
 
       var requestURL = './src/assets/widgets/chat-widget/get-messages.php?from_user='+current_user+'&to_user='+clicked_user;
