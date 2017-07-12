@@ -6,8 +6,8 @@ return [
       "host" => "localhost",
       "dbname" => "division network",
       "charset" => "utf8",
-      "username" => "users",
-      "password" => "ZaJQ5mwxe3F3nz9n"
+      "username" => "root",
+      "password" => ""
   ],
   "mail" => [
       "transport" => "smtp",
