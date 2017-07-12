@@ -18,25 +18,29 @@
 
     <div id="chat-sidebar-online">Online (3)</div>
     <?php foreach ($members AS $member): ?>
-    <div class="sidebar-name">
-        <form class="chat-ident-form" action="javascript:void(0);" method="post">
+      <div class="sidebar-name">
+        <form class="chat-ident-form" action="./src/assets/widgets/chat-widget/get-messages.php" method="post" onclick="submit_ident_form_via_ajax();">
           <a href="javascript:register_popup('<?php echo $member['username'] ?>', '<?php echo $member['username'] ?>');">
-              <img class="img-circle chat-sidebar-user-avatar" src="<?php echo $member["avatar"]; ?>" />
-              <span><?php echo $member['username'] ?></span>
+             <img class="img-circle chat-sidebar-user-avatar" src="<?php echo $member["avatar"]; ?>" />
+             <span><?php echo $member['username'] ?></span>
           </a>
           <input type="hidden" name="to_user" value="<?php echo $member['username'] ?>">
           <input type="hidden" name="from_user" value="<?php echo $_SESSION['username'] ?>">
         </form>
-    </div>
+       </div>
     <?php endforeach; ?>
     <div id="chat-sidebar-offline">Offline (3)</div>
     <?php foreach ($members AS $member): ?>
-    <div class="sidebar-name">
-        <a href="javascript:register_popup('<?php echo $member['username'] ?>', '<?php echo $member['username'] ?>');">
-            <img class="img-circle chat-sidebar-user-avatar" src="<?php echo $member["avatar"]; ?>" />
-            <span><?php echo $member['username'] ?></span>
-        </a>
-    </div>
+      <div class="sidebar-name">
+        <form class="chat-ident-form" action="./src/assets/widgets/chat-widget/get-messages.php" method="post" onclick="submit_ident_form_via_ajax();">
+          <a href="javascript:register_popup('<?php echo $member['username'] ?>', '<?php echo $member['username'] ?>');">
+             <img class="img-circle chat-sidebar-user-avatar" src="<?php echo $member["avatar"]; ?>" />
+             <span><?php echo $member['username'] ?></span>
+          </a>
+          <input type="hidden" name="to_user" value="<?php echo $member['username'] ?>">
+          <input type="hidden" name="from_user" value="<?php echo $_SESSION['username'] ?>">
+        </form>
+       </div>
     <?php endforeach; ?>
   </div>
 </aside>
