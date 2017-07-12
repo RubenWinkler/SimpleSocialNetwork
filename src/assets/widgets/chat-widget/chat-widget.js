@@ -95,12 +95,7 @@
        });
     }
 
-    function submit_ident_form_via_ajax () {
-      $(this).ajaxSubmit(function() {
-        alert("SUBMITTED");
-        getMessages();
-       });
-    }
+    document.getElementById("user").addEventListener("click", function(){ alert("Hello World!"); });
 
     function getMessages () {
 
