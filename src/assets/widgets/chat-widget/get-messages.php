@@ -3,13 +3,8 @@
 include_once("chat-utilities-script.php");
 include_once("./../../../../src/php/login-system/database-connection-script.php");
 
-echo "DRAUSSEN";
-
-var_dump($_GET);
-
 if (isset($_GET["from_user"]) && isset($_GET["to_user"])) {
 
-  echo "DRINNEN";
   // Daten aus DB auslesen
   try {
 

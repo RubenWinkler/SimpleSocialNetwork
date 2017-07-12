@@ -19,7 +19,7 @@
 
     <div id="chat-sidebar-online">Online (3)</div>
     <?php foreach ($members AS $member): ?>
-      <div class="sidebar-name" onclick="getMessages('<?php echo $member['username'] ?>', '<?php echo $_SESSION['username'] ?>');">
+      <div class="sidebar-name" onclick="setTimeout(getMessages('<?php echo $member['username'] ?>', '<?php echo $_SESSION['username'] ?>'), 3000);">
           <a class="chat-ident-form-link" href="javascript:register_popup('<?php echo $member['username'] ?>', '<?php echo $member['username'] ?>');">
              <img class="img-circle chat-sidebar-user-avatar" src="<?php echo $member["avatar"]; ?>" />
              <span><?php echo $member['username'] ?></span>

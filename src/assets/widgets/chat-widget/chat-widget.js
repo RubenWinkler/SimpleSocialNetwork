@@ -95,13 +95,24 @@
        });
     }
 
+    function submit_ident_form_via_ajax () {
+       $(".chat-ident-form").ajaxSubmit(function() {
+         getMessages();
+        });
+    }
+
+    $(document).ready(function() {
+
+        $(document).on('click', '.chat-ident-form', function(){
+          var to_user = $("#user").html();
+        });
+    });
+
     function getMessages (clicked_user, current_user) {
 
       var request = new XMLHttpRequest();
 
       var requestURL = './src/assets/widgets/chat-widget/get-messages.php?from_user='+current_user+'&to_user='+clicked_user;
-
-      alert(requestURL);
 
       request.onreadystatechange = function () {
 
