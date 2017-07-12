@@ -46,6 +46,8 @@
     //generiert den HTML-Code für neue Pop-Up's und fügt die Pop-Up-ID dem Array hinzu
     function register_popup(id, name) {
 
+        //$(".chat_form").submit();
+
         for(var iii = 0; iii < popups.length; iii++) {
             //wenn ID schon bekannt, bringe Pop-Up nach vorne
             if(id == popups[iii]) {
@@ -56,13 +58,15 @@
             }
         }
 
+        var current_user = $("#username").html();
+
         var element = '<div class="popup-box chat-popup" id="'+ id +'">';
         element = element + '<div class="popup-head">';
         element = element + '<div class="popup-head-left">'+ name +'</div>';
+        element = element + '<form class="chat-ident-form" action="javascript:void(0);" method="post"><input type="hidden" name="to_user" value="'+ name +'"><input type="hidden" name="from_user" value="'+ current_user +'"></form> '
         element = element + '<div class="popup-head-right"><a href="javascript:close_popup(\''+ id +'\');">&#10005;</a></div>';
-        element = element + '<div style="clear: both"></div></div><div class="popup-messages"><div class="chat-container">';
-        element = element + '<div class="chat-massage-container"><div class="chat-massage-a">Jo Jan, was hältst du vom neuen Chat?</div></div><div class="chat-massage-container"><div class="chat-massage-b">Ich denke er funktioniert noch nicht! xD</div></div>';
-        element = element + '<div class="chat-massage-container"><div class="chat-massage-a">Ja leider! -.-</div></div><div class="chat-massage-container"><div class="chat-massage-b">Aber Kopf hoch... wird schon! ^^</div></div><div class="chat-massage-container"><div class="chat-massage-a">Jajajaja... eines schönen Tages!</div></div><div class="form-group"><textarea class="form-control chat-input" rows="1" id=""></textarea></div></div></div></div>';
+        element = element + '<div style="clear: both"></div></div><div class="popup-messages"><div class="chat-container"></div>';
+        element = element + '<form class="form-group chat-box-form" method="POST" action="./src/assets/widgets/chat-widget/send-messages.php" onsubmit="submit_via_ajax();"><input class="form-control chat-input" name="chat_message"><input type="hidden" name="chat_target_user" value="'+ name +'"><input type="hidden" name="chat_user" value="'+ current_user +'"><input class="form-control chat-submit-button" type="submit" name="senden"  value="Senden"></form></div></div>';
         document.getElementsByTagName("body")[0].innerHTML = document.getElementsByTagName("body")[0].innerHTML + element;
         popups.unshift(id);
         calculate_popups();
@@ -84,3 +88,36 @@
     //berechnet Anzahl an Pop-Up's neu, sobald Seite neu geladen wird oder Fenster skaliert wird
     window.addEventListener("resize", calculate_popups);
     window.addEventListener("load", calculate_popups);
+
+    function submit_via_ajax () {
+      $(this).ajaxForm(function() {
+         $(".chat-box-form").clearForm();
+       });
+    }
+
+    function submit_ident_form_via_ajax () {
+      $(this).ajaxSubmit(function() {
+        alert("SUBMITTED");
+        getMessages();
+       });
+    }
+
+    function getMessages () {
+
+      var request = new XMLHttpRequest();
+
+      request.onreadystatechange = function () {
+
+        if (request.readyState == 4 && request.status == 200) {
+
+          document.getElementsByClassName('.chat-container').innerHTML = request.responseText;
+
+        }
+
+      };
+
+      request.open('GET', './src/assets/widgets/chat-widget/get-messages.php', true);
+
+      request.send();
+
+      }

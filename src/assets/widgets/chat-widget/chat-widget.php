@@ -14,26 +14,37 @@
       </div>
     </form>
 
+    <div id="test"></div>
+
     <div id="chat-sidebar-online">Online (3)</div>
     <?php foreach ($members AS $member): ?>
     <div class="sidebar-name">
-        <a href="javascript:register_popup('<?php echo $member['username'] ?>', '<?php echo $member['username'] ?>');">
-            <img class="img-circle chat-sidebar-user-avatar" src="<?php echo $member["avatar"]; ?>" />
-            <span><?php echo $member['username'] ?></span>
-        </a>
+        <form class="chat-ident-form" action="javascript:void(0);" method="post">
+          <a href="javascript:register_popup('<?php echo $member['username'] ?>', '<?php echo $member['username'] ?>');">
+              <img class="img-circle chat-sidebar-user-avatar" src="<?php echo $member["avatar"]; ?>" />
+              <span><?php echo $member['username'] ?></span>
+          </a>
+          <input type="hidden" name="to_user" value="<?php echo $member['username'] ?>">
+          <input type="hidden" name="from_user" value="<?php echo $_SESSION['username'] ?>">
+        </form>
     </div>
     <?php endforeach; ?>
-
+    <!--
     <div id="chat-sidebar-offline">Offline (3)</div>
-    <?php foreach ($members AS $member): ?>
+    <?php //foreach ($members AS $member): ?>
     <div class="sidebar-name">
-        <a href="javascript:register_popup('<?php echo $member['username'] ?>', '<?php echo $member['username'] ?>');">
-            <img class="img-circle chat-sidebar-user-avatar" src="<?php echo $member["avatar"]; ?>" />
-            <span><?php echo $member['username'] ?></span>
+        <a href="javascript:register_popup('<?php //echo $member['username'] ?>', '<?php //echo $member['username'] ?>');">
+            <img class="img-circle chat-sidebar-user-avatar" src="<?php //echo $member["avatar"]; ?>" />
+            <span><?php //echo $member['username'] ?></span>
         </a>
     </div>
-    <?php endforeach; ?>
+    <?php //endforeach; ?>
   </div>
+  -->
 </aside>
 
 <?php endif ?>
+
+<script>
+
+</script>

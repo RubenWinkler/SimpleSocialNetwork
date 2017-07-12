@@ -11,6 +11,9 @@
   <meta name="author" content="DIVISION Network">
   <!-- jQuery -->
   <script src="./src/js/jquery-3.2.1.min.js"></script>
+  <!-- jQuery Form-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.1/jquery.form.min.js" integrity="sha384-tIwI8+qJdZBtYYCKwRkjxBGQVZS3gGozr3CtI+5JF/oL1JmPEHzCEnIKbDbLTCer" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
   <!-- Bootstrap -->
   <link rel="stylesheet" href="./src/css/bootstrap.min.css">
   <!-- Font Awesome -->

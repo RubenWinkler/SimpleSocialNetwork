@@ -478,9 +478,24 @@ a#show-login-again-text:hover {
 .chat-input {
 	position: fixed;
 	bottom: 0;
-	width: 298px;
+	width: 219px;
 	resize: none;
 	border-radius: 0;
+}
+
+.chat-box-form {
+  position: fixed;
+	bottom: 0;
+  margin: 0;
+  width: 298px;
+  height: 34px;
+}
+
+.chat-submit-button {
+  float: right;
+  height: 34px;
+  width: 80px;
+  border-radius: 0;
 }
 
 .chat-massage-container {
