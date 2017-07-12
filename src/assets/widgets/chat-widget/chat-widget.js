@@ -95,7 +95,18 @@
        });
     }
 
-    document.getElementById("user").addEventListener("click", function(){ alert("Hello World!"); });
+    function submit_ident_form_via_ajax () {
+       $(".chat-ident-form").ajaxSubmit(function() {
+         getMessages();
+        });
+    }
+
+    $(document).ready(function() {
+
+        $(document).on('click', '.chat-ident-form', function(){
+          var to_user = $("#user").html();
+        });
+    });
 
     function getMessages () {
 
@@ -105,7 +116,10 @@
 
         if (request.readyState == 4 && request.status == 200) {
 
-          document.getElementsByClassName('.chat-container').innerHTML = request.responseText;
+          $(document).ready(function() {
+
+              $(".chat-container").html(request.responseText);
+          });
 
         }
 

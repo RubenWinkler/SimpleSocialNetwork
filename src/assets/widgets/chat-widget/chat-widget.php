@@ -1,5 +1,6 @@
 <?php if (isset($_SESSION["username"]) || isCookieValid($db)): ?>
 <script type="text/javascript" src="./src/assets/widgets/chat-widget/chat-widget.js"></script>
+<script> var username = "<?php echo $_SESSION["username"]?>"; </script>
 
 <?php include_once("./src/php/login-system/members-script.php") ?>
 
@@ -18,29 +19,21 @@
 
     <div id="chat-sidebar-online">Online (3)</div>
     <?php foreach ($members AS $member): ?>
-      <div class="sidebar-name">
-        <form class="chat-ident-form"  action="./src/assets/widgets/chat-widget/get-messages.php" method="post">
-          <a href="javascript:register_popup('<?php echo $member['username'] ?>', '<?php echo $member['username'] ?>');">
+      <div class="sidebar-name" onclick="getMessages(<?php echo $member['username'] ?>, <?php echo $_SESSION['username'] ?>)">
+          <a class="chat-ident-form-link" href="javascript:register_popup('<?php echo $member['username'] ?>', '<?php echo $member['username'] ?>');">
              <img class="img-circle chat-sidebar-user-avatar" src="<?php echo $member["avatar"]; ?>" />
              <span><?php echo $member['username'] ?></span>
           </a>
-          <input type="hidden" name="to_user" value="<?php echo $member['username'] ?>">
-          <input type="hidden" name="from_user" value="<?php echo $_SESSION['username'] ?>">
-        </form>
        </div>
     <?php endforeach; ?>
     <div id="chat-sidebar-offline">Offline (3)</div>
     <?php foreach ($members AS $member): ?>
-      <div class="sidebar-name">
-        <form class="chat-ident-form" action="./src/assets/widgets/chat-widget/get-messages.php" method="post" onclick="submit_ident_form_via_ajax();">
-          <a href="javascript:register_popup('<?php echo $member['username'] ?>', '<?php echo $member['username'] ?>');">
-             <img class="img-circle chat-sidebar-user-avatar" src="<?php echo $member["avatar"]; ?>" />
-             <span><?php echo $member['username'] ?></span>
-          </a>
-          <input type="hidden" name="to_user" value="<?php echo $member['username'] ?>">
-          <input type="hidden" name="from_user" value="<?php echo $_SESSION['username'] ?>">
-        </form>
-       </div>
+      <div class="sidebar-name" onclick="getMessages(<?php echo $member['username'] ?>, username)">
+        <a href="javascript:register_popup('<?php echo $member['username'] ?>', '<?php echo $member['username'] ?>');">
+           <img class="img-circle chat-sidebar-user-avatar" src="<?php echo $member["avatar"]; ?>" />
+           <span><?php echo $member['username'] ?></span>
+        </a>
+      </div>
     <?php endforeach; ?>
   </div>
 </aside>
