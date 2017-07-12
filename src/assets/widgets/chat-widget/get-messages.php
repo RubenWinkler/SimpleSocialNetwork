@@ -5,16 +5,16 @@ include_once("./../../../../src/php/login-system/database-connection-script.php"
 
 echo "DRAUSSEN";
 
-var_dump($_POST);
+var_dump($_GET);
 
-if (isset($_POST["from_user"]) && isset($_POST["to_user"])) {
+if (isset($_GET["from_user"]) && isset($_GET["to_user"])) {
 
   echo "DRINNEN";
   // Daten aus DB auslesen
   try {
 
-    $from_user = $_POST["chat_user"];
-    $to_user = $_POST["chat_target_user"];
+    $from_user = $_GET["chat_user"];
+    $to_user = $_GET["chat_target_user"];
 
     $query = "SELECT * FROM chat WHERE from_user = :from_user AND to_user = :to_user";
 
@@ -24,8 +24,8 @@ if (isset($_POST["from_user"]) && isset($_POST["to_user"])) {
 
     $to_messages = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    $from_user = $_POST["chat_target_user"];
-    $to_user = $_POST["chat_user"];
+    $from_user = $_GET["chat_target_user"];
+    $to_user = $_GET["chat_user"];
 
     $query = "SELECT * FROM chat WHERE from_user = :from_user AND to_user = :to_user";
 
