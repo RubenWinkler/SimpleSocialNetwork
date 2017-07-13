@@ -502,7 +502,7 @@ a#show-login-again-text:hover {
 	width: 100%;
 	height: auto;
 	min-height: 30px;
-	display: block;
+	display: inline-block;
 }
 
 .chat-container {

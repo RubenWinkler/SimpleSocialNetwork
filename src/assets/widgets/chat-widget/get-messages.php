@@ -38,13 +38,17 @@ if (isset($_GET["from_user"]) && isset($_GET["to_user"])) {
 
     foreach ($all_messages AS $message) {
 
+        $decodeMessage = base64_decode($message["message"]);
+        $decodedMessageArray = explode("uh63hsUz78jjnehF2358ßdFbbsaAjhgfc", $decodeMessage);
+        $decodedMessage = $decodedMessageArray[1];
+
         if ($message["from_user"] == $to_user) {
 
-          $html_messages .= "<div class='chat-massage-container'><div class='chat-massage-a'>". $message["message"] ."</div></div>";
+          $html_messages .= "<div class='chat-massage-container'><div class='chat-massage-a'>". $decodedMessage ."</div></div>";
 
         } else {
 
-          $html_messages .= "<div class='chat-massage-container'><div class='chat-massage-b'>". $message["message"] ."</div></div>";
+          $html_messages .= "<div class='chat-massage-container'><div class='chat-massage-b'>". $decodedMessage ."</div></div>";
 
         }
 

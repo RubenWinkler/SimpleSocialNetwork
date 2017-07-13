@@ -7,6 +7,7 @@ if (isset($_POST["chat_message"]) && isset($_POST["chat_target_user"]) && isset(
   try {
 
     $message = $_POST["chat_message"];
+    $encodedMessage = base64_encode("uh63hsUz78jjnehF2358ßdFbbsaAjhgfc{$message}");
     $from_user = $_POST["chat_user"];
     $to_user = $_POST["chat_target_user"];
 
@@ -14,7 +15,7 @@ if (isset($_POST["chat_message"]) && isset($_POST["chat_target_user"]) && isset(
 
     $statement = $db->prepare($query);
 
-    $statement->execute([":from_user" => $from_user, ":to_user" => $to_user, ":message" => $message]);
+    $statement->execute([":from_user" => $from_user, ":to_user" => $to_user, ":message" => $encodedMessage]);
 
   } catch (PDOException $ex) {
 
