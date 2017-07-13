@@ -10,7 +10,13 @@
 
   } catch (PDOException $ex) {
 
-    $result = flashMessage("Es ist ein Fehler aufgereten: " . $ex->getMessage());
+    $result = "<script type=\"text/javascript\">
+                    swal({
+                    title: \"Datenbank?! Wo bist du?\",
+                    text: \"Oha... unsere Datenbank scheint im Moment andersweitig beschäftigt zu sein, tut uns leid! Versuch es später noch einmal!\",
+                    type: \"error\"
+                    });
+                    </script>";
 
   }
 

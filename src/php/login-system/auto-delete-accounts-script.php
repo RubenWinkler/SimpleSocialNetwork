@@ -40,25 +40,23 @@ try {
 
       $result = $db->exec("DELETE FROM users WHERE id = $id AND activated = '0' LIMIT 1");
 
-      echo "$result Account(s) deleted.";
-
       $mail_body = '<html>
                     <head>
                         <meta charset="utf-8">
-                        <title>Deaktivierter Account gelöscht [Admin]</title>
+                        <title>[ADMIN NACHRICHT]: Deaktivierter Account wurde gelöscht</title>
                         <style type="text/css">
                         </style>
                     </head>
-                    <body style="background-color:#CCCCCC; color:#000; font-family: Arial, Helvetica, sans-serif;
+                    <body style="color:#000; font-family: Arial, Helvetica, sans-serif;
                                         line-height:1.8em;">
-                    <h2>Deaktivierter Account gelöscht [Admin]</h2>
+                    <h2>[ADMIN NACHRICHT]: Deaktivierter Account wurde gelöscht</h2>
                     <p>Der deaktivierte Account von '.$username.' wurde gelöscht.</p>
                     </body>
                     </html>';
 
       $emailAddress = "r.winkler1412@gmail.com";
       $mail->addAddress($emailAddress, $username);
-      $mail->Subject = "Deaktivierter Account gelöscht [Admin]";
+      $mail->Subject = "[ADMIN NACHRICHT]: Deaktivierter Account wurde gelöscht";
       $mail->Body = $mail_body;
 
       $mail->Send();
@@ -72,20 +70,20 @@ try {
   $mail_body = '<html>
                 <head>
                     <meta charset="utf-8">
-                    <title>PDOException: Deaktivierter Account konnte nicht gelöscht werden [Admin]</title>
+                    <title>[ADMIN NACHRICHT]: Deaktivierter Account konnte nicht gelöscht werden</title>
                     <style type="text/css">
                     </style>
                 </head>
-                <body style="background-color:#CCCCCC; color:#000; font-family: Arial, Helvetica, sans-serif;
+                <body style="color:#000; font-family: Arial, Helvetica, sans-serif;
                                     line-height:1.8em;">
-                <h2>PDOException: Deaktivierter Account konnte nicht gelöscht werden [Admin]</h2>
+                <h2>[ADMIN NACHRICHT]: Deaktivierter Account konnte nicht gelöscht werden</h2>
                 <p>Der deaktivierte Account von '.$username.' konnte nicht gelöscht werden. Grund: ' . $ex . '</p>
                 </body>
                 </html>';
 
   $emailAddress = "r.winkler1412@gmail.com";
   $mail->addAddress($emailAddress, $username);
-  $mail->Subject = "PDOException: Deaktivierter Account konnte nicht gelöscht werden [Admin]";
+  $mail->Subject = "[ADMIN NACHRICHT]: Deaktivierter Account konnte nicht gelöscht werden";
   $mail->Body = $mail_body;
 
   $mail->Send();
@@ -106,25 +104,23 @@ try {
 
       $result = $db->exec("DELETE FROM users WHERE id = $user_id AND activated = '0' LIMIT 1");
 
-      echo "$result Account(s) deleted.";
-
       $mail_body = '<html>
                     <head>
                         <meta charset="utf-8">
-                        <title>Nicht aktivierter Account gelöscht [Admin]</title>
+                        <title>[ADMIN NACHRICHT]: Nicht aktivierter Account wurde gelöscht</title>
                         <style type="text/css">
                         </style>
                     </head>
-                    <body style="background-color:#CCCCCC; color:#000; font-family: Arial, Helvetica, sans-serif;
+                    <body style="color:#000; font-family: Arial, Helvetica, sans-serif;
                                         line-height:1.8em;">
-                    <h2>Nicht aktivierter Account gelöscht [Admin]</h2>
+                    <h2>[ADMIN NACHRICHT]: Nicht aktivierter Account wurde gelöscht</h2>
                     <p>Der nicht aktivierte Account von '.$username.' wurde gelöscht.</p>
                     </body>
                     </html>';
 
       $emailAddress = "r.winkler1412@gmail.com";
       $mail->addAddress($emailAddress, $username);
-      $mail->Subject = "Nicht aktivierter Account gelöscht [Admin]";
+      $mail->Subject = "[ADMIN NACHRICHT]: Nicht aktivierter Account wurde gelöscht";
       $mail->Body = $mail_body;
 
       $mail->Send();
@@ -138,20 +134,20 @@ try {
   $mail_body = '<html>
                 <head>
                     <meta charset="utf-8">
-                    <title>PDOException: Nicht aktivierter Account konnte nicht gelöscht werden [Admin]</title>
+                    <title>[ADMIN NACHRICHT]: Nicht aktivierter Account konnte nicht gelöscht werden</title>
                     <style type="text/css">
                     </style>
                 </head>
-                <body style="background-color:#CCCCCC; color:#000; font-family: Arial, Helvetica, sans-serif;
+                <body style="color:#000; font-family: Arial, Helvetica, sans-serif;
                                     line-height:1.8em;">
-                <h2>PDOException: Nicht aktivierter Account konnte nicht gelöscht werden [Admin]</h2>
+                <h2>[ADMIN NACHRICHT]: Nicht aktivierter Account konnte nicht gelöscht werden</h2>
                 <p>Der nicht aktivierte Account von '.$username.' konnte nicht gelöscht werden. Grund: ' . $exc . '</p>
                 </body>
                 </html>';
 
   $emailAddress = "r.winkler1412@gmail.com";
   $mail->addAddress($emailAddress, $username);
-  $mail->Subject = "PDOException: Nicht aktivierter Account konnte nicht gelöscht werden [Admin]";
+  $mail->Subject = "[ADMIN NACHRICHT]: Nicht aktivierter Account konnte nicht gelöscht werden";
   $mail->Body = $mail_body;
 
   $mail->Send();

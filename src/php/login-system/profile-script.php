@@ -214,7 +214,7 @@ if ((isset($_SESSION["id"]) || isset($_GET["user-identity"])) && !isset($_POST["
           $result = "<script type=\"text/javascript\">
                           swal({
                           title: \"Profil bearbeitet!\",
-                          text: \"Deine Account-Daten wurden erfolrgeich geändert.\",
+                          text: \"Super... deine Account-Daten wurden erfolrgeich geändert.\",
                           type: \"success\",
                           closeOnConfirm: false
                           },
@@ -228,7 +228,7 @@ if ((isset($_SESSION["id"]) || isset($_GET["user-identity"])) && !isset($_POST["
           $result = "<script type=\"text/javascript\">
                           swal({
                           title: \"Profil nicht bearbeitet!\",
-                          text: \"Deine Profil wurde nicht bearbeitet. Versuch es noch einmal!\",
+                          text: \"Ooops... die Änderungen konnten leider nicht gespeichert werden. Versuch es einfach noch einmal!\",
                           type: \"error\",
                           closeOnConfirm: false
                           },
@@ -240,8 +240,13 @@ if ((isset($_SESSION["id"]) || isset($_GET["user-identity"])) && !isset($_POST["
 
       } catch (PDOException $ex) {
 
-        $result = flashMessage("Ein Fehler ist aufgetreten: " . $ex->getMessage());
-
+        $result = "<script type=\"text/javascript\">
+                        swal({
+                        title: \"Datenbank?! Wo bist du?\",
+                        text: \"Oha... unsere Datenbank scheint gerade andersweitig beschäftigt zu sein, tut uns leid! Versuch es einfach noch einmal!\",
+                        type: \"error\"
+                        });
+                        </script>";
       }
 
     } else {
@@ -260,8 +265,13 @@ if ((isset($_SESSION["id"]) || isset($_GET["user-identity"])) && !isset($_POST["
 
   } else {
 
-    $result = "<script type='text/javascript'>swal('Error', 'Diese Anfrage stammt von einer unbekannten Quelle. Es handelt sich möglicher Weise um einen Angriff.', 'error');</script>";
-
+    $result = "<script type=\"text/javascript\">
+                    swal({
+                    title: \"Ähhhmmm... wer bist du?!\",
+                    text: \"Diese Anfrage stammt von einer unbekannten Quelle. Aber keine Sorge, hierbei handelt es sich nur um einen Sicherheitsmechanismus. Versuch es einfach noch einmal!\",
+                    type: \"error\"
+                    });
+                    </script>";
   }
 
 }

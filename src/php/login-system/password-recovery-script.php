@@ -39,7 +39,7 @@ if (isset($_POST["password-reset-button"], $_POST["token"])) {
         if ($password1 != $password2) {
 
           // wird eine Fehlermeldung ausgegeben.
-          $result = "<p>Die eingegebenen Passwörter stimmen nicht überein.</p>";
+          $result = "Die eingegebenen Passwörter stimmen nicht überein.";
 
           // Wenn die Passwörter übereinstimmen,
         } else {
@@ -66,7 +66,13 @@ if (isset($_POST["password-reset-button"], $_POST["token"])) {
 
                 $isValid = false;
 
-                $result = flashMessage("Du hast ein ungültiges Token eingegeben.");
+                $result = "<script type=\"text/javascript\">
+                                swal({
+                                title: \"Ungültiges Token!\",
+                                text: \"Du hast ein ungültiges Token eingegben. Versuch es einfach noch einmal!\",
+                                type: \"error\"
+                                });
+                                </script>";
 
               }
 
@@ -74,7 +80,13 @@ if (isset($_POST["password-reset-button"], $_POST["token"])) {
 
                 $isValid = false;
 
-                $result = flashMessage("Das von dir genutzte Token ist abgelaufen. Fordere ein neues an.");
+                $result = "<script type=\"text/javascript\">
+                                swal({
+                                title: \"Token abgelaufen!\",
+                                text: \"Dein Token ist leider abgelaufen. Fordere einfach ein neues an!\",
+                                type: \"error\"
+                                });
+                                </script>";
 
                 // Token löschen
                 $db->exec("DELETE FROM password_recovery WHERE email = '$email' AND token = '$reset_token'");
@@ -122,7 +134,7 @@ if (isset($_POST["password-reset-button"], $_POST["token"])) {
                 // ein passender Success-Sweet-Alert ausgegeben.
                 $result = "<script type=\"text/javascript\">
                             swal({
-                            title: \"Passwort wurde geändert!\",
+                            title: \"Passwort erfolgreich geändert!\",
                             text: \"Du kannst dich jetzt mit deinem neuen Passwort anmelden.\",
                             type: \"success\",
                             closeOnConfirm: false
@@ -148,7 +160,13 @@ if (isset($_POST["password-reset-button"], $_POST["token"])) {
           } catch (PDOException $ex) {
 
             // eine Fehlermeldung wird ausgegeben.
-            $result = flashMessage("Passwort ändern fehlgeschlagen:" . $ex->getMessage());
+            $result = "<script type=\"text/javascript\">
+                            swal({
+                            title: \"Datenbank?! Wo bist du?\",
+                            text: \"Oha... unsere Datenbank scheint im Moment andersweitig beschäftigt zu sein, tut uns leid! Versuch es später noch einmal!\",
+                            type: \"error\"
+                            });
+                            </script>";
 
           }
 
@@ -175,8 +193,13 @@ if (isset($_POST["password-reset-button"], $_POST["token"])) {
 
   } else {
 
-    $result = "<script type='text/javascript'>swal('Error', 'Diese Anfrage stammt von einer unbekannten Quelle. Es handelt sich möglicher Weise um einen Angriff.', 'error');</script>";
-
+    $result = "<script type=\"text/javascript\">
+                    swal({
+                    title: \"Ähhhmmm... wer bist du?!\",
+                    text: \"Diese Anfrage stammt von einer unbekannten Quelle. Aber keine Sorge, hierbei handelt es sich nur um einen Sicherheitsmechanismus. Versuch es einfach noch einmal!\",
+                    type: \"error\"
+                    });
+                    </script>";
   }
 
   // Wenn nicht der Passwort-Reset-Button, sondern der Passwort-Recovery-Button gedrückt wurde,
@@ -238,19 +261,19 @@ if (isset($_POST["password-reset-button"], $_POST["token"])) {
                             <style type="text/css">
                             </style>
                         </head>
-                        <body style="background-color:#CCCCCC; color:#000; font-family: Arial, Helvetica, sans-serif;
+                        <body style="color:#000; font-family: Arial, Helvetica, sans-serif;
                                             line-height:1.8em;">
-                        <h2>Recover your Password</h2>
-                        <p>Hello '.$username.',<br><br>To recover your password, copy the token below and click on the "Recover-Password" link.</p>
-                        <p>Token: '.$reset_token.'
-                        <p><a href="http://localhost/SimpleSocialNetwork/password-recovery.php">Recover Password</a></p>
-                        <p><strong>&copy;'.date("Y").' The Simple Social Network</strong></p>
+                        <h2>Simple Social Network: Passwort zurücksetzen</h2>
+                        <p>Hello '.$username.',<br><br>um dein Passwort zurückzusetzen, kopiere bitte das Authetifizierungs-Token und klicke auf den Link weiter unten.</p>
+                        <p>Authetifizierungs-Token: '.$reset_token.'
+                        <p><a href="http://localhost/SimpleSocialNetwork/password-recovery.php">Passwort zurücksetzen</a></p>
+                        <p><strong>&copy; '.date("Y").' The Simple Social Network</strong></p>
                         </body>
                         </html>';
           // der Adressat mit der im Formular eingegebenen E-Mail Adresse und dem Benutzernamen hinzugefügt,
           $mail->addAddress($email, $username);
           // der Betreff der E-Mail auf "DIVISION Network: Passwort zurücksetzen" gesetzt und
-          $mail->Subject = "The Simple Social Network: Password Recovery";
+          $mail->Subject = "Simple Social Network: Passwort zurücksetzen";
           // der Inhalt (Body) der E-Mail auf den eben definierten $mail_body gesetzt.
           $mail->Body = $mail_body;
 
@@ -261,12 +284,9 @@ if (isset($_POST["password-reset-button"], $_POST["token"])) {
             $result = "<script type=\"text/javascript\">
                             swal({
                             title: \"Passwort nicht zurückgesetzt!\",
-                            text: \"Das Passwort konnte leider nicht zurückgesetzt werden.\",
+                            text: \"Ooops... dein Passwort konnte leider nicht zurückgesetzt werden, tut uns leid. Versuch es einfach noch einmal!\",
                             type: \"error\",
                             closeOnConfirm: false
-                            },
-                            function(){
-                              window.location.href = 'signup.php';
                             });
                             </script>";
 
@@ -276,13 +296,13 @@ if (isset($_POST["password-reset-button"], $_POST["token"])) {
             // wird ein Success-Sweet-Alert ausgegeben.
             $result = "<script type=\"text/javascript\">
                             swal({
-                            title: \"Passwort-Recovery-Link verschickt!\",
-                            text: \"Wir haben dir eine E-Mail mit einem Passwort-Recovery-Link geschickt.\",
+                            title: \"Jetzt dein Passwort zurücksetzen!\",
+                            text: \"Wir haben dir eine E-Mail mit einem Passwort-Zurücksetzen-Link und einem Authentifizierungs-Token gesendet. Schau doch mal in deinem E-Mail Postfach nach!\",
                             type: \"success\",
                             closeOnConfirm: false
                             },
                             function(){
-                              window.location.href = 'index.php';
+                              window.location.href = 'password-recovery.php';
                             });
                             </script>";
 
@@ -292,7 +312,13 @@ if (isset($_POST["password-reset-button"], $_POST["token"])) {
         } else {
 
           // eine Fehlermeldung ausgegeben.
-          $result = flashMessage("Die angegebene E-Mail Adresse wurde nicht in unserer Datenbank gefunden.");
+          $result = "<script type=\"text/javascript\">
+                          swal({
+                          title: \"E-Mail Adresse nicht gefunden!\",
+                          text: \"Wir konnten leider deine E-Mail Adresse nicht in unserer Datenbank finden. Versuch es noch einmal!\",
+                          type: \"error\"
+                          });
+                          </script>";
 
         }
 
@@ -300,7 +326,13 @@ if (isset($_POST["password-reset-button"], $_POST["token"])) {
       } catch (PDOException $ex) {
 
         // eine Fehlermeldung ausgegeben.
-        $result = flashMessage("Ein Fehler ist aufgetreten: " . $ex->getMessage());
+        $result = "<script type=\"text/javascript\">
+                        swal({
+                        title: \"Datenbank?! Wo bist du?\",
+                        text: \"Oha... unsere Datenbank scheint gerade andersweitig beschäftigt zu sein, tut uns leid! Versuch es einfach noch einmal!\",
+                        type: \"error\"
+                        });
+                        </script>";
 
       }
 
@@ -324,7 +356,13 @@ if (isset($_POST["password-reset-button"], $_POST["token"])) {
 
   } else {
 
-    $result = "<script type='text/javascript'>swal('Error', 'Diese Anfrage stammt von einer unbekannten Quelle. Es handelt sich möglicher Weise um einen Angriff.', 'error');</script>";
+    $result = "<script type=\"text/javascript\">
+                    swal({
+                    title: \"Ähhhmmm... wer bist du?!\",
+                    text: \"Diese Anfrage stammt von einer unbekannten Quelle. Aber keine Sorge, hierbei handelt es sich nur um einen Sicherheitsmechanismus. Versuch es einfach noch einmal!\",
+                    type: \"error\"
+                    });
+                    </script>";
 
   }
 

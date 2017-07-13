@@ -16,5 +16,5 @@ $mail->Username = "your_gmail_user_name@gmail.com";
 $mail->Password = "your_gmail_password";
 
 //Sender Info
-$mail->From = "no-reply@ictdesignhub.com";
-$mail->FromName = "User Authentication";
+$mail->From = "no-reply@xy.com";
+$mail->FromName = "FromXY";

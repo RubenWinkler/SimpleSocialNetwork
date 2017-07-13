@@ -37,13 +37,13 @@ if(isset($_POST["E-Mail"], $_POST["token"])) {
     if (checkDuplicateEntries("users", "email", $email, $db)) {
 
       // wird eine Fehlermeldung ausgegeben.
-      $result = flashMessage("Registrierung nicht möglich: E-Mail Adresse ist bereits vergeben, bitte verwende eine andere.");
+      $result = flashMessage("Tut uns leid, die E-Mail Adresse ist bereits vergeben. Bitte verwende eine andere!");
 
       // Sonst (wenn die E-Mail nicht schon in Verwendung ist) wird geprüft, ob der Benutzername schon vergeben ist und
     } elseif (checkDuplicateEntries("users", "username", $username, $db)) {
 
       // eine Fehlermeldung wird ausgegeben.
-      $result = flashMessage("Registrierung nicht möglich: Benutzername ist bereits vergeben, bitte verwende einen anderen.");
+      $result = flashMessage("Tut uns leid, der Benutzername ist bereits vergeben. Bitte verwende einen anderen!");
 
     // Sind die E-Mail Adresse oder der Benutzername nicht schon vergeben, so wird geprüft, ob es sonst Fehler gibt und
     } elseif (empty($form_errors)) {
@@ -76,16 +76,16 @@ if(isset($_POST["E-Mail"], $_POST["token"])) {
           $mail_body = '<html>
                         <head>
                             <meta charset="utf-8">
-                            <title>Herzlich Willkommen im DIVISION Network</title>
+                            <title>Willkommen im Simple Social Network</title>
                             <style type="text/css">
                             </style>
                         </head>
-                        <body style="background-color:#CCCCCC; color:#000; font-family: Arial, Helvetica, sans-serif;
+                        <body style="color:#000; font-family: Arial, Helvetica, sans-serif;
                                             line-height:1.8em;">
-                        <h2>Herzlich Willkommen im DIVISION Network</h2>
-                        <p>Hallo '.$username.',<br><br>Vielen Dank für deine Registrierung. Klicke auf den folgenden Link, um deine E-Mail Adresse zu bestätigen und damit deinen Account zu aktivieren:</p>
+                        <h2>Willkommen im Simple Social Network</h2>
+                        <p>Hallo '.$username.',<br><br>Vielen Dank für deine Registrierung. Klicke auf den folgenden Link, um deine E-Mail Adresse zu bestätigen und deinen Account zu aktivieren:</p>
                         <p><a href="http://localhost/SimpleSocialNetwork/activate.php?id='.$encode_id.'"> Account aktivieren</a></p>
-                        <p><strong>&copy;2017 DIVISION Network</strong></p>
+                        <p><strong>&copy; '.date("Y").' Simple Social Network</strong></p>
                         </body>
                         </html>';
 
@@ -95,7 +95,7 @@ if(isset($_POST["E-Mail"], $_POST["token"])) {
           $mail->addAddress($email, $username);
 
           // wird der Betreff der E-Mail auf "DIVISION Network: Aktiviere deinen Account" gesetzt und
-          $mail->Subject = "DIVISION Network: Aktiviere deinen Account";
+          $mail->Subject = "Simple Social Network: Aktiviere deinen Account";
 
           // wird der Inhalt (Body) der E-Mail auf den eben definierten $mail_body gesetzt.
           $mail->Body = $mail_body;
@@ -107,7 +107,7 @@ if(isset($_POST["E-Mail"], $_POST["token"])) {
             $result = "<script type=\"text/javascript\">
                             swal({
                             title: \"Registrierung fehlgeschlagen!\",
-                            text: \"Die Registrierung ist leider fehlgeschlagen.\",
+                            text: \"Ooops... Die Registrierung ist leider fehlgeschlagen. Versuch es doch noch einmal!\",
                             type: \"error\",
                             closeOnConfirm: false
                             },
@@ -122,7 +122,7 @@ if(isset($_POST["E-Mail"], $_POST["token"])) {
             $result = "<script type=\"text/javascript\">
                             swal({
                             title: \"Registrierung erfolgreich!\",
-                            text: \"Wir haben dir eine E-Mail mit einem Aktivierungslink für deinen Account geschickt.\",
+                            text: \"Super, das hat geklappt! Wir haben dir eine E-Mail mit einem Aktivierungslink für deinen Account geschickt. Bitte schau in deinem E-Mail Postfach nach.\",
                             type: \"success\",
                             closeOnConfirm: false
                             },
@@ -149,13 +149,13 @@ if(isset($_POST["E-Mail"], $_POST["token"])) {
       if (count($form_errors) == 1) {
 
         // die Fehlermeldung für einen Fehler ausgegeben und
-        $result = flashMessage("Eine deiner Angaben ist nicht korrekt: ");
+        $result = flashMessage("Eine deiner Angaben ist leider nicht korrekt: ");
 
         // bei mehr als einem Fehler,
       } else {
 
         // die Fehlermeldung für mehrere Fehler ausgegeben.
-        $result = flashMessage(count($form_errors) . " deiner Angaben sind nicht korrekt:");
+        $result = flashMessage(count($form_errors) . " deiner Angaben sind leider nicht korrekt:");
 
       }
 
@@ -163,8 +163,13 @@ if(isset($_POST["E-Mail"], $_POST["token"])) {
 
   } else {
 
-    $result = "<script type='text/javascript'>swal('Error', 'Diese Anfrage stammt von einer unbekannten Quelle. Es handelt sich möglicher Weise um einen Angriff.', 'error');</script>";
-
+    $result = "<script type=\"text/javascript\">
+                    swal({
+                    title: \"Ähhhmmm... wer bist du?!\",
+                    text: \"Diese Anfrage stammt von einer unbekannten Quelle. Aber keine Sorge, hierbei handelt es sich nur um einen Sicherheitsmechanismus. Versuch es einfach noch einmal!\",
+                    type: \"error\"
+                    });
+                    </script>";
   }
 
   // Wenn nicht das Formular abgeschickt wurde, sondern $_GET['id'] gesetzt ist (also der Benutzer über den Aktivierungslink in der E-Mail zur activate.php-Seite gekommen ist)
@@ -195,14 +200,33 @@ if(isset($_POST["E-Mail"], $_POST["token"])) {
   if ($statement->rowCount() == 1) {
 
     // wird eine Erfolgsnachricht angezeigt.
-    $result = "<h2>Dein Account wurde erfolgreich aktivert!</h2>
-              <p>Du hast deinen Account erfolgreich aktiviert und kannst dich nun mit deinem Benutzernamen und deinem Passwort <a href='login.php'>einloggen</a>.</p>";
+    $result = "<script type=\"text/javascript\">
+                    swal({
+                    title: \"Account erfolgreich aktiviert!\",
+                    text: \"Juhuu... du hast deinen Account erfolgreich aktiviert! Wir wünschen dir viel Spaß im Simple Social Network! =)\",
+                    type: \"success\",
+                    closeOnConfirm: false
+                    },
+                    function(){
+                      window.location.href = 'index.php';
+                    });
+                    </script>";
 
     // Sonst,
   } else {
 
     // wird eine Fehlernachricht angezeigt.
-    $result = "<p>Da ist leider etwas schief gegangen. Solltest du deinen Account nicht schon bereits aktiviert haben, kontaktiere uns bitte.</p>";
+    $result = "<script type=\"text/javascript\">
+                    swal({
+                    title: \"Ooops...!\",
+                    text: \"Tut uns leid, aber dein Account konnte nicht aktivert werden. Sollte dieses Problem weiterhin auftreten, zögere nicht uns zu kontaktieren!\",
+                    type: \"error\",
+                    closeOnConfirm: false
+                    },
+                    function(){
+                      window.location.href = 'index.php';
+                    });
+                    </script>";
 
     }
 

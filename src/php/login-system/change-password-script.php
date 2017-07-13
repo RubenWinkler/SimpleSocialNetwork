@@ -25,7 +25,7 @@ if (isset($_POST["change-password-button"], $_POST["token"])) {
 
       if ($password1 != $password2) {
 
-        $result = flashMessage("Es wurde nicht zweimal das selbe neue Passwort eingegeben.");
+        $result = flashMessage("Es wurden zwei verschiedene neue Passwörter eingegeben.");
 
       } else {
 
@@ -63,7 +63,13 @@ if (isset($_POST["change-password-button"], $_POST["token"])) {
 
               } else {
 
-                $result = flashMessage("Passwort konnte nicht geändert werden.");
+                $result = "<script type=\"text/javascript\">
+                                swal({
+                                title: \"Ooops... Passwort nicht geändert!\",
+                                text: \"Tut uns leid, aber dein Passwort konnte nicht geändert werden. Versuch es einfach noch einmal!\",
+                                type: \"error\"
+                                });
+                                </script>";
 
               }
 
@@ -82,8 +88,13 @@ if (isset($_POST["change-password-button"], $_POST["token"])) {
 
         } catch (PDOException $ex) {
 
-          $result = flashMessage("Ein Fehler ist aufgetreten: " . $ex->getMessage());
-
+          $result = "<script type=\"text/javascript\">
+                          swal({
+                          title: \"Datenbank?! Wo bist du?\",
+                          text: \"Oha... unsere Datenbank scheint gerade andersweitig beschäftigt zu sein, tut uns leid! Versuch es einfach noch einmal!\",
+                          type: \"error\"
+                          });
+                          </script>";
         }
 
       }
@@ -94,13 +105,13 @@ if (isset($_POST["change-password-button"], $_POST["token"])) {
       if (count($form_errors) == 1) {
 
         // wird die Fehlermeldung für einen Fehler ausgegeben,
-        $result = flashMessage("Eine deiner Angaben ist nicht korrekt:<br />");
+        $result = flashMessage("Eine deiner Angaben ist leider nicht korrekt:<br />");
 
         //sonst, wenn mehrere Fehler im form_errors-Array gespeichert sind,
       } else {
 
         // wird die fehlermeldung für mehrere Fehler ausgegeben.
-        $result = flashMessage(count($form_errors) . " deiner Angaben sind nicht korrekt:");
+        $result = flashMessage(count($form_errors) . " deiner Angaben sind leider nicht korrekt:");
 
         }
 
@@ -108,10 +119,15 @@ if (isset($_POST["change-password-button"], $_POST["token"])) {
 
   } else {
 
-    $result = "<script type='text/javascript'>swal('Error', 'Diese Anfrage stammt von einer unbekannten Quelle. Es handelt sich möglicher Weise um einen Angriff.', 'error');</script>";
+    $result = "<script type=\"text/javascript\">
+                    swal({
+                    title: \"Ähhhmmm... wer bist du?!\",
+                    text: \"Diese Anfrage stammt von einer unbekannten Quelle. Aber keine Sorge, hierbei handelt es sich nur um einen Sicherheitsmechanismus. Versuch es einfach noch einmal!\",
+                    type: \"error\"
+                    });
+                    </script>";
 
   }
 }
-
 
  ?>

@@ -16,11 +16,24 @@ if (isset($_POST["delete-post"]) && isset($_POST["securityToken"])) {
 
     } catch (PDOException $ex) {
 
+      $result = "<script type=\"text/javascript\">
+                      swal({
+                      title: \"Datenbank?! Wo bist du?\",
+                      text: \"Oha... unsere Datenbank scheint gerade andersweitig beschäftigt zu sein, tut uns leid! Versuch es einfach noch einmal!\",
+                      type: \"error\"
+                      });
+                      </script>";
     }
 
   } else {
 
-    $result = "<script type='text/javascript'>swal('Error', 'Du hast nicht die Berechtigung diesen Post zu löschen.', 'error');</script>";
+    $result = "<script type=\"text/javascript\">
+                    swal({
+                    title: \"Nope! Nicht dein Post!\",
+                    text: \"Tut uns leid, aber das scheint nicht dein eigener Post zu sein. Solltest du mit den Inhalten nicht einverstanden sein, dann kann du diesen Post einfach melden.\",
+                    type: \"error\"
+                    });
+                    </script>";
 
   }
 

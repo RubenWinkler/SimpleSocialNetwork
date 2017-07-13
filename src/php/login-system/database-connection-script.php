@@ -29,8 +29,13 @@ try {
 
 } catch (PDOException $ex) {
 
-    // Nachricht bei fehlgeschlagener Verbindung zur Database
-    echo "<br /><br />Verbindung mit DIVISION Network Database fehlgeschlagen!<br />Fehler: " . $ex->getMessage();
+  $result = "<script type=\"text/javascript\">
+                  swal({
+                  title: \"Datenbank?! Wo bist du?\",
+                  text: \"Oha... unsere Datenbank scheint zur Zeit andersweitig beschäftigt zu sein, tut uns leid! Versuch es später noch einmal!\",
+                  type: \"error\"
+                  });
+                  </script>";
 }
 
 ?>

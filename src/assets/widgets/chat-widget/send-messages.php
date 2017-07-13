@@ -19,8 +19,13 @@ if ((isset($_POST["chat_message"]) && isset($_POST["chat_target_user"]) && isset
 
   } catch (PDOException $ex) {
 
-    echo "Ein Fehler ist aufgetreten!";
-
+    $result = "<script type=\"text/javascript\">
+                    swal({
+                    title: \"Datenbank?! Wo bist du?\",
+                    text: \"Oha... unsere Datenbank scheint gerade andersweitig beschäftigt zu sein, tut uns leid! Versuch es einfach noch einmal!\",
+                    type: \"error\"
+                    });
+                    </script>";
   }
 
 }

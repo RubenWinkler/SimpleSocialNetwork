@@ -60,8 +60,13 @@ if (isset($_GET["from_user"]) && isset($_GET["to_user"])) {
 
   } catch (PDOException $ex) {
 
-    echo "Es ist ein Fehler aufgetreten!";
-
+    $result = "<script type=\"text/javascript\">
+                    swal({
+                    title: \"Datenbank?! Wo bist du?\",
+                    text: \"Oha... unsere Datenbank scheint gerade andersweitig beschäftigt zu sein, tut uns leid! Versuch es einfach später noch einmal!\",
+                    type: \"error\"
+                    });
+                    </script>";
   }
 
 }

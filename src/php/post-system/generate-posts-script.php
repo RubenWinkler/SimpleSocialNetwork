@@ -321,6 +321,12 @@ try {
 
 } catch (PDOException $ex) {
 
-  $result = flashMessage("Es können keine Posts generiert werden: " . $ex->getMessage());
+  $result = "<script type=\"text/javascript\">
+                  swal({
+                  title: \"Datenbank?! Wo bist du?\",
+                  text: \"Oha... unsere Datenbank scheint gerade andersweitig beschäftigt zu sein, tut uns leid! Versuch es einfach später noch einmal!\",
+                  type: \"error\"
+                  });
+                  </script>";
 
 }

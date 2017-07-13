@@ -73,7 +73,13 @@ if (isset($_POST['login-button'], $_POST["token"])) {
               } else {
 
                 // wird die Fehlermeldung "Bitte aktiviere deinen Account." ausgegeben.
-                $result = flashMessage("Bitte aktiviere deinen Account.");
+                $result = "<script type=\"text/javascript\">
+                                swal({
+                                title: \"Bitte aktiviere deinen Account!\",
+                                text: \"Tut uns leid, aber dein Account scheint noch nicht aktiviert zu sein. Bei deiner Registrierung haben wird dir eine E-Mail mit einem Aktivierungslink geschickt.\",
+                                type: \"error\"
+                                });
+                                </script>";
 
               }
 
@@ -124,7 +130,13 @@ if (isset($_POST['login-button'], $_POST["token"])) {
 
     } else {
 
-      $result = "<script type='text/javascript'>swal('Error', 'Diese Anfrage stammt von einer unbekannten Quelle. Es handelt sich möglicher Weise um einen Angriff.', 'error');</script>";
+      $result = "<script type=\"text/javascript\">
+                      swal({
+                      title: \"Ähhhmmm... wer bist du?!\",
+                      text: \"Diese Anfrage stammt von einer unbekannten Quelle. Aber keine Sorge, hierbei handelt es sich nur um einen Sicherheitsmechanismus. Versuch es einfach noch einmal!\",
+                      type: \"error\"
+                      });
+                      </script>";
 
     }
 

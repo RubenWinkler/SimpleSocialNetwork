@@ -306,8 +306,13 @@ if ((isset($_POST["post-box-posten-button"]) || isset($_POST["post-box-posten-bu
 
   } else {
 
-    $result = "<script type='text/javascript'>swal('Error', 'Diese Anfrage stammt von einer unbekannten Quelle. Es handelt sich möglicher Weise um einen Angriff.', 'error');</script>";
-
+    $result = "<script type=\"text/javascript\">
+                    swal({
+                    title: \"Ähhhmmm... wer bist du?!\",
+                    text: \"Diese Anfrage stammt von einer unbekannten Quelle. Aber keine Sorge, hierbei handelt es sich nur um einen Sicherheitsmechanismus. Versuch es einfach noch einmal!\",
+                    type: \"error\"
+                    });
+                    </script>";
   }
 
 }

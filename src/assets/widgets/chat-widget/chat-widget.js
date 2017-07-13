@@ -29,7 +29,7 @@ function display_popups() {
 
    var iii = 0;
    for(iii; iii < total_popups; iii++) {
-       if(popups[iii] != undefined) {
+       if(popups[iii] !== undefined) {
            var element = document.getElementById(popups[iii]);
            element.style.right = right + "px";
            right = right + 320;
@@ -61,12 +61,11 @@ function register_popup(id, name) {
    var current_user = $("#username").html();
 
    var element = '<div class="popup-box chat-popup" id="'+ id +'">';
-   element = element + '<div class="popup-head">';
-   element = element + '<div class="popup-head-left">'+ name +'</div>';
-   element = element + '<form class="chat-ident-form" action="javascript:void(0);" method="post"><input type="hidden" name="to_user" value="'+ name +'"><input type="hidden" name="from_user" value="'+ current_user +'"></form> '
-   element = element + '<div class="popup-head-right"><a href="javascript:close_popup(\''+ id +'\');">&#10005;</a></div>';
-   element = element + '<div style="clear: both"></div></div><div class="popup-messages"><div class="chat-container" id="'+ id + "-chat-container"+'"></div>';
-   element = element + '<form class="form-group chat-box-form" method="POST" action="./src/assets/widgets/chat-widget/send-messages.php" onsubmit="submit_via_ajax();"><input class="form-control chat-input" name="chat_message"><input type="hidden" name="chat_target_user" value="'+ name +'"><input type="hidden" name="chat_user" value="'+ current_user +'"><input class="form-control chat-submit-button" id="'+id+'-form-control" type="submit" name="senden"  value="Senden"></form></div></div>';
+   element += '<div class="popup-head">';
+   element += '<div class="popup-head-left">'+ name +'</div>';
+   element += '<div class="popup-head-right"><a href="javascript:close_popup(\''+ id +'\');">&#10005;</a></div>';
+   element += '<div style="clear: both"></div></div><div class="popup-messages"><div class="chat-container" id="'+ id + "-chat-container"+'"></div>';
+   element += '<form class="form-group chat-box-form" method="POST" action="./src/assets/widgets/chat-widget/send-messages.php" onsubmit="submit_via_ajax();"><input class="form-control chat-input" name="chat_message"><input type="hidden" name="chat_target_user" value="'+ name +'"><input type="hidden" name="chat_user" value="'+ current_user +'"><input class="form-control chat-submit-button" id="'+id+'-form-control" type="submit" name="senden"  value="Senden"></form></div></div>';
    document.getElementsByTagName("body")[0].innerHTML = document.getElementsByTagName("body")[0].innerHTML + element;
    popups.unshift(id);
    calculate_popups();
@@ -102,8 +101,6 @@ function getMessages (clicked_user, current_user) {
  });
 
  function syncMessages () {
-
- console.log("WURKS", clicked_user, current_user);
 
  var request = new XMLHttpRequest();
 

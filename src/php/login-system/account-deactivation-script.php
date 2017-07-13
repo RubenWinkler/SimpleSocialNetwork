@@ -42,24 +42,24 @@ if (isset($_POST["deactivate-account-button"], $_POST["token"])) {
             $mail_body = '<html>
                           <head>
                               <meta charset="utf-8">
-                              <title>Dein Account wurde deaktiviert</title>
+                              <title>Simple Social Network: Account deaktiviert</title>
                               <style type="text/css">
                               </style>
                           </head>
-                          <body style="background-color:#CCCCCC; color:#000; font-family: Arial, Helvetica, sans-serif;
+                          <body style="color:#000; font-family: Arial, Helvetica, sans-serif;
                                               line-height:1.8em;">
-                          <h2>Dein Account wurde deaktiviert</h2>
-                          <p>Hallo '.$username.',<br><br>Dein Account wurde erfolgreich deaktiviert. Deine Benutzerdaten werden für weitere 14 Tage gespeichert.
+                          <h2>Simple Social Network: Account deaktiviert</h2>
+                          <p>Hallo '.$username.',<br><br>Schade, dass du gehst! Wir gewünscht, haben wir deinen Account soeben deaktiviert. Deine Benutzerdaten werden für weitere 14 Tage gespeichert.
                           Solltest du es dir anders überlegen, brauchst du dich nur erneut wie gewohnt mit Benutzernamen und Passwort anzumelden.
-                          Nach Ablauf der 14 Tage werden deine Benutzerdaten entgültig aus unserem System gelöscht.</p>
+                          Nach Ablauf der 14 Tage werden deine Benutzerdaten natürlich entgültig aus unserem System gelöscht.</p>
                           <br />
-                          <p><a href="http://localhost/DIVISION-Network/pages/login.php"> Doch Mitglied bleiben?</a></p>
-                          <p><strong>&copy;2017 DIVISION Network</strong></p>
+                          <p><a href="http://localhost/SimpleSocialNetwork/index.php"> Doch Mitglied bleiben?</a></p>
+                          <p><strong>&copy; 'date("Y")' Simple Social Network</strong></p>
                           </body>
                           </html>';
 
             $mail->addAddress($email, $username);
-            $mail->Subject = "DIVISION Network: Account erfolgreich deaktiviert";
+            $mail->Subject = "Simple Social Network: Account deaktiviert";
             $mail->Body = $mail_body;
 
             if (!$mail->Send()) {
@@ -67,9 +67,9 @@ if (isset($_POST["deactivate-account-button"], $_POST["token"])) {
               $result = "<script type=\"text/javascript\">
                         swal({
                         title: \"Account nicht deaktiviert!\",
-                        text: \"Dein Account konnte leider nicht deaktiviert werden. Probier es noch einmal.\",
+                        text: \"Ooops... Dein Account konnte leider nicht deaktiviert werden. Versuch es noch einmal!\",
                         type: \"error\",
-                        confirmButtonText: \"Nochmal probieren!\" });
+                        confirmButtonText: \"Okay!\" });
                         });
                         </script>";
 
@@ -78,7 +78,7 @@ if (isset($_POST["deactivate-account-button"], $_POST["token"])) {
               $result = "<script type=\"text/javascript\">
                         swal({
                         title: \"Account deaktiviert!\",
-                        text: \"Dein Account wurde erfolgreich deaktiviert. Deine Benutzerdaten werden für weitere 14 Tage gespeichert. Solltest du es dir anders überlegen, brauchst du dich nur erneut wie gewohnt mit Benutzernamen und Passwort anzumelden. Nach Ablauf der 14 Tage werden deine Benutzerdaten entgültig aus unserem System gelöscht.\",
+                        text: \"Dein Account wurde erfolgreich deaktiviert. Wir haben dir hierzu soeben auch eine E-Mail gesendet.\",
                         type: \"success\",
                         confirmButtonText: \"Okay!\" });
                         </script>";
@@ -87,13 +87,25 @@ if (isset($_POST["deactivate-account-button"], $_POST["token"])) {
 
           } else {
 
-            $result = flashMessage("Account konnte nicht deaktiviert werden. Versuch es noch einmal.");
+            $result = "<script type=\"text/javascript\">
+                            swal({
+                            title: \"Da ist etwas schief gegangen! =/\",
+                            text: \"Ooops... tut uns leid, aber dein Account konnte nicht deaktiviert werden. Versuch es noch einmal!\",
+                            type: \"error\"
+                            });
+                            </script>";
 
           }
 
         } else {
 
-          $result = flashMessage("Account konnte nicht deaktiviert werden. Versuch es noch einmal.");
+          $result = "<script type=\"text/javascript\">
+                          swal({
+                          title: \"Da ist etwas schief gegangen! =/\",
+                          text: \"Ooops... tut uns leid, aber dein Account konnte nicht deaktiviert werden. Versuch es noch einmal!\",
+                          type: \"error\"
+                          });
+                          </script>";
 
         }
 
@@ -105,15 +117,27 @@ if (isset($_POST["deactivate-account-button"], $_POST["token"])) {
 
     } catch (PDOException $ex) {
 
-      $result = flashMessage("Ein Fehler ist aufgetreten: " . $ex->getMessage());
-
+      $result = "<script type=\"text/javascript\">
+                      swal({
+                      title: \"Datenbank?! Wo bist du?\",
+                      text: \"Oha... unsere Datenbank scheint gerade andersweitig beschäftigt zu sein, tut uns leid! Versuch es einfach noch einmal!\",
+                      type: \"error\"
+                      });
+                      </script>";
     }
 
   } else {
 
-    $result = "<script type='text/javascript'>swal('Error', 'Diese Anfrage stammt von einer unbekannten Quelle. Es handelt sich möglicher Weise um einen Angriff.', 'error');</script>";
+    $result = "<script type=\"text/javascript\">
+                    swal({
+                    title: \"Ähhhmmm... wer bist du?!\",
+                    text: \"Diese Anfrage stammt von einer unbekannten Quelle. Aber keine Sorge, hierbei handelt es sich nur um einen Sicherheitsmechanismus. Versuch es einfach noch einmal!\",
+                    type: \"error\"
+                    });
+                    </script>";
 
   }
 
 }
+
  ?>

@@ -4,10 +4,10 @@ return [
   "database" => [
       "driver" => "mysql",
       "host" => "localhost",
-      "dbname" => "division network",
+      "dbname" => "simple social network",
       "charset" => "utf8",
-      "username" => "root",
-      "password" => ""
+      "username" => "users",
+      "password" => "DTZJutt3KxQnvAWu"
   ],
   "mail" => [
       "transport" => "smtp",
