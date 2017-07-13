@@ -143,4 +143,4 @@ function getMessages (clicked_user, current_user) {
   syncMessages();
   setInterval(function(){syncMessages ();},3000);
 
-  }
+}ddd
