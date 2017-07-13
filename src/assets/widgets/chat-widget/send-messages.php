@@ -2,7 +2,7 @@
 
 include_once("./../../../../src/php/login-system/database-connection-script.php");
 
-if (isset($_POST["chat_message"]) && isset($_POST["chat_target_user"]) && isset($_POST["chat_user"])) {
+if ((isset($_POST["chat_message"]) && isset($_POST["chat_target_user"]) && isset($_POST["chat_user"])) && trim($_POST["chat_message"]) !== "") {
 
   try {
 
