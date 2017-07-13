@@ -17,6 +17,7 @@ if (isset($_SESSION["username"])) {$page_title = "Mitglieder";}
 
   <!-- MEMBERS LIST ================================================== -->
   <?php foreach ($members AS $member): ?>
+    <?php if ($member["username"] !== $_SESSION["username"]): ?>
     <div class="container-fluid members-member-container">
       <table>
         <tr>
@@ -41,6 +42,7 @@ if (isset($_SESSION["username"])) {$page_title = "Mitglieder";}
         </tr>
       </table>
     </div>
+    <?php endif; ?>
   <?php endforeach; ?>
 
   <?php endif ?>

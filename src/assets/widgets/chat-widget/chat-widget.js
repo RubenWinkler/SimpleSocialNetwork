@@ -65,7 +65,8 @@ function register_popup(id, name) {
    element += '<div class="popup-head-left">'+ name +'</div>';
    element += '<div class="popup-head-right"><a href="javascript:close_popup(\''+ id +'\');">&#10005;</a></div>';
    element += '<div style="clear: both"></div></div><div class="popup-messages"><div class="chat-container" id="'+ id + "-chat-container"+'"></div>';
-   element += '<form class="form-group chat-box-form" method="POST" action="./src/assets/widgets/chat-widget/send-messages.php" onsubmit="submit_via_ajax();"><input class="form-control chat-input" name="chat_message"><input type="hidden" name="chat_target_user" value="'+ name +'"><input type="hidden" name="chat_user" value="'+ current_user +'"><input class="form-control chat-submit-button" id="'+id+'-form-control" type="submit" name="senden"  value="Senden"></form></div></div>';
+   element += '<form class="form-group chat-box-form" method="POST" action="./src/assets/widgets/chat-widget/send-messages.php" onsubmit="submit_via_ajax();"><input class="form-control chat-input" name="chat_message"><input type="hidden" name="chat_target_user" value="'+ name +'"><input type="hidden" name="chat_user" value="'+ current_user +'">';
+   element += '<input class="form-control chat-submit-button" id="'+id+'-form-control" type="submit" name="senden" value="Senden"></form></div></div>';
    document.getElementsByTagName("body")[0].innerHTML = document.getElementsByTagName("body")[0].innerHTML + element;
    popups.unshift(id);
    calculate_popups();
@@ -96,34 +97,34 @@ function submit_via_ajax () {
 
 function getMessages (clicked_user, current_user) {
 
- $(document).on('click', '#'+clicked_user+'-form-control', function(){
-       syncMessages();
- });
+   $(document).on('click', '#'+clicked_user+'-form-control', function(){
+         syncMessages();
+   });
 
- function syncMessages () {
+   function syncMessages () {
 
- var request = new XMLHttpRequest();
+   var request = new XMLHttpRequest();
 
- var requestURL = './src/assets/widgets/chat-widget/get-messages.php?from_user='+current_user+'&to_user='+clicked_user;
+   var requestURL = './src/assets/widgets/chat-widget/get-messages.php?from_user='+current_user+'&to_user='+clicked_user;
 
- request.onreadystatechange = function () {
+   request.onreadystatechange = function () {
 
-   if (request.readyState == 4 && request.status == 200) {
+     if (request.readyState == 4 && request.status == 200) {
 
-     $(document).ready(function() {
+       $(document).ready(function() {
 
-         $("#"+clicked_user+"-chat-container").html(request.responseText);
-     });
+           $("#"+clicked_user+"-chat-container").html(request.responseText);
+       });
+     }
+   };
+
+   request.open('GET', requestURL , true);
+
+   request.send();
+
    }
- };
 
- request.open('GET', requestURL , true);
+   syncMessages();
+   setInterval(function(){syncMessages ();},3000);
 
- request.send();
-
- }
-
- syncMessages();
- setInterval(function(){syncMessages ();},3000);
-
- }
+}

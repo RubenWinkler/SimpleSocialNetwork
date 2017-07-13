@@ -220,7 +220,7 @@ try {
             </div>
             <div class="row post-row">
               <div class="col-xs-12 no-padding">
-                <a class="btn btn-default post-link" href="'.$link.'" target="_blank"><i class="fa fa-caret-right fa-lg" aria-hidden="true"></i> www.winkler-webdesgin.com</a>
+                <a class="btn btn-default post-link" href="'.$link.'" target="_blank"><i class="fa fa-caret-right fa-lg" aria-hidden="true"></i> '.$link.'</a>
               </div>
             </div>';
 

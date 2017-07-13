@@ -34,6 +34,8 @@ if (isset($_GET["from_user"]) && isset($_GET["to_user"])) {
 
     usort($all_messages, "sortFunction");
 
+    $all_messages = array_reverse($all_messages, true);
+
     $html_messages = "";
 
     foreach ($all_messages AS $message) {

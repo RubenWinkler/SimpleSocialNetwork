@@ -19,21 +19,25 @@
 
     <div id="chat-sidebar-online">Online (3)</div>
     <?php foreach ($members AS $member): ?>
+      <?php if ($member["username"] !== $_SESSION["username"]): ?>
       <div class="sidebar-name" onclick="getMessages('<?php echo $member['username'] ?>', '<?php echo $_SESSION['username'] ?>')">
-          <a class="chat-ident-form-link" href="javascript:register_popup('<?php echo $member['username'] ?>', '<?php echo $member['username'] ?>');">
+        <a class="chat-ident-form-link" href="javascript:register_popup('<?php echo $member['username'] ?>', '<?php echo $member['username'] ?>');">
              <img class="img-circle chat-sidebar-user-avatar" src="<?php echo $member["avatar"]; ?>" />
              <span><?php echo $member['username'] ?></span>
-          </a>
-       </div>
+        </a>
+      </div>
+      <?php endif; ?>
     <?php endforeach; ?>
     <div id="chat-sidebar-offline">Offline (3)</div>
     <?php foreach ($members AS $member): ?>
-      <div class="sidebar-name" onclick="getMessages('<?php echo $member['username'] ?>', '<?php echo $_SESSION['username'] ?>');">
-        <a href="javascript:register_popup('<?php echo $member['username'] ?>', '<?php echo $member['username'] ?>');">
-           <img class="img-circle chat-sidebar-user-avatar" src="<?php echo $member["avatar"]; ?>" />
-           <span><?php echo $member['username'] ?></span>
+      <?php if ($member["username"] !== $_SESSION["username"]): ?>
+      <div class="sidebar-name" onclick="getMessages('<?php echo $member['username'] ?>', '<?php echo $_SESSION['username'] ?>')">
+        <a class="chat-ident-form-link" href="javascript:register_popup('<?php echo $member['username'] ?>', '<?php echo $member['username'] ?>');">
+             <img class="img-circle chat-sidebar-user-avatar" src="<?php echo $member["avatar"]; ?>" />
+             <span><?php echo $member['username'] ?></span>
         </a>
       </div>
+      <?php endif; ?>
     <?php endforeach; ?>
   </div>
 </aside>

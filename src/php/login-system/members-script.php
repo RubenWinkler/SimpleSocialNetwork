@@ -2,7 +2,11 @@
 
   try {
 
-    $statement = $db->query("SELECT * FROM users WHERE activated = '1'");
+    $query = "SELECT * FROM users WHERE activated = '1'";
+
+    $statement = $db->prepare($query);
+
+    $statement->execute();
 
     $members = $statement->fetchAll(PDO::FETCH_ASSOC);
 
